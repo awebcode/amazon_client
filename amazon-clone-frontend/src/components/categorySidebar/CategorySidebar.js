@@ -16,35 +16,35 @@ const categories = [
     subcategories: [],
   },
   {
-    name: "Medicine",
-    subcategories: ["Food", "Sports"],
+    name: "Medicince",
+    subcategories: ["food", "sports"],
   },
   {
     name: "Jewellery",
-    subcategories: ["Cosmetic"],
+    subcategories: ["cosmetic"],
   },
   {
-    name: "Dress",
-    subcategories: ["Book", "The Fine Arts"],
+    name: "cosmetic",
+    subcategories: ["book", "the fine arts"],
   },
   {
     name: "Furniture",
     subcategories: [],
   },
   {
-    name: "Music",
+    name: "music",
     subcategories: [],
   },
   {
-    name: "Vehicles",
+    name: "vihicles",
     subcategories: [],
   },
   {
-    name: "Business Products",
+    name: "Business products",
     subcategories: [],
   },
   {
-    name: "Others",
+    name: "others",
     subcategories: [],
   },
 ];
@@ -96,6 +96,7 @@ const CategorySidebar = ({ setOpen, user }) => {
               }}
               className="category-title"
             >
+              
               {category.name}{" "}
               <span>
                 {category.subcategories.length > 0 && (

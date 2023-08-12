@@ -19,7 +19,7 @@ const NavBar = () => {
   
   return (
     <header className="bg-amazonclone">
-      <div className="flex justify-between items-center py-2 px-4 md:px-10 lg:px-16 xl:px-20">
+      <div className="flex justify-between items-center py-1 md:py-2 px-4 md:px-10 lg:px-16 xl:px-20">
         {/* Left */}
         <div className="flex items-center">
           <Link to={"/"}>
@@ -30,7 +30,7 @@ const NavBar = () => {
                 alt="Amazon logo"
               />
             ) : (
-              <span className="text-2xl text-white">Amazon</span>
+              <span className="text-[16px] md:text-3xl text-white">Amazon</span>
             )}
           </Link>
           <div className="ml-3 hidden md:block text-white">
@@ -62,7 +62,10 @@ const NavBar = () => {
             <div className="text-sm xl:text-base font-bold">& Orders</div>
           </div>
 
-          <Link to={"/message"} className="ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10">
+          <Link
+            to={"/message"}
+            className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+          >
             {/* ... Message icon ... */}
             <div className="flex pr-3 pl-3">
               <svg
@@ -126,16 +129,16 @@ const NavBar = () => {
           </span>
           {sidebar && <CategorySidebar setOpen={setSidebar} user={user} />}
         </div>
-        <div>Today's Deals</div>
-        <div>
+        <div className="text-[8px] md:text-[16px] ">Today's Deals</div>
+        <div className="text-[8px] md:text-[16px] ">
           <Link to="/products">Products</Link>
         </div>
-        <div>Customer Service</div>
+        <div className="hidden md:block text-[8px] md:text-[16px] ">Customer Service</div>
         <div>
           <Link to="https://adminamazon.vercel.app/">Admin Pannel</Link>
         </div>
-        <div>Gift Cards</div>
-        <div>Sell</div>
+        <div className="hidden md:block text-[8px] md:text-[16px] ">Gift Cards</div>
+        <div className="hidden md:block text-[8px] md:text-[16px] ">Sell</div>
       </div>
     </header>
   );

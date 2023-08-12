@@ -8,7 +8,8 @@
   }
 }
 body {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  margin: 0px;padding: 0px;border: 0px;outline: 0px;box-sizing: border-box;
 }
 .custom_border {
   position: absolute;
@@ -18,4 +19,26 @@ body {
   width: 20%;
   height: 2px;
   background-color: crimson;
+}
+.swiper-button-next{
+  color:black;
+ 
+}
+.swiper-button-prev{
+  color:black;
+  
+  
+  
+}
+@media(max-width:768px){
+  .swiper-button-next{
+  font-size: 10px !important;
+  height: 10px !important;
+  width: 10px !important;
+}
+.swiper-button-prev{
+   font-size: 10px !important;
+  height: 10px !important;
+  width: 10px !important;
+}
 }

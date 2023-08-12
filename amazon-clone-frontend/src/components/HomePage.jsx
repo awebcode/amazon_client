@@ -104,7 +104,7 @@ const HomePage = () => {
               <h2 className="text-center font-bold">No Products Available</h2>
             ))}
         </div>
-        <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
           {data &&
             data.products.map((data, i) => {
               return (
@@ -118,6 +118,7 @@ const HomePage = () => {
                   price={data.price}
                   ratings={data.ratings}
                   lessPrice={data.lessPrice}
+                  inStock={data.inStock}
                 />
               );
             })}
@@ -141,7 +142,7 @@ const HomePage = () => {
               <h2 className="text-center font-bold">No Products Available</h2>
             ))}
         </div>
-        <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
           {data2 &&
             data2.products.slice(8, 16).map((data, i) => {
               return (
@@ -155,6 +156,7 @@ const HomePage = () => {
                   price={data.price}
                   ratings={data.ratings}
                   lessPrice={data.lessPrice}
+                  inStock={data.inStock}
                 />
               );
             })}
@@ -172,7 +174,7 @@ const HomePage = () => {
               <h2 className="text-center font-bold">No Products Available</h2>
             ))}
         </div>
-        <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
           {data2 &&
             data2.products.slice(4, 12).map((data, i) => {
               return (
@@ -186,6 +188,7 @@ const HomePage = () => {
                   price={data.price}
                   ratings={data.ratings}
                   lessPrice={data.lessPrice}
+                  inStock={data.inStock}
                 />
               );
             })}

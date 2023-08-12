@@ -1,6 +1,6 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, createSearchParams, useNavigate } from "react-router-dom";
 import { useGetProductCategoriesQuery } from "../redux/categoryApi";
 import { useGetAllProductQuery } from "../redux/productApi";
 
@@ -81,34 +81,44 @@ const Search = () => {
       document.body.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
+const searchCategory = (category) => {
+  navigate({
+    pathname: "search",
+    search: `${createSearchParams({
+      category: ``,
+      searchTerm: `${searchTerm}`,
+    })}`,
+  });
+};
   return (
     <div className="w-auto md:w-[100%]">
       <div
-        className="flex items-center h-6 md:h-10  bg-amazonclone-yellow rounded"
+        className="flex items-center h-5 md:h-10  bg-amazonclone-yellow rounded"
         ref={suggestionContainerRef}
       >
         <select
           onChange={(e) => {
             setCategory(e.target.value);
           }}
-          className="w-[50px] md:w-auto p-1 bg-gray-300 text-black border text-xs xl:text-sm text-[10px] md:text[25px]"
+          className="w-[35px] md:w-auto  bg-gray-300 text-black border text-xs xl:text-sm text-[10px] md:text[25px] h-[100%]"
         >
           <option value="All">All</option>
           {categories.map((v, u) => (
-            <option className="" value={v.title} key={u}>
+            <option className="border-none p-2" value={v.title} key={u}>
               {v.title}
             </option>
           ))}
         </select>
         <input
-          className="flex-grow items-center w-[50px] md:w-auto h-[100%] rounded-l text-black"
+          className="flex-grow items-center w-[65px] md:w-auto h-[100%] rounded-l text-black"
           type="text"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
           onFocus={handleInputFocus}
         />
-        <button onClick={onHandleSubmit} className="w-[16px] md:w-[45px]">
+        <button onClick={searchCategory} className="w-[16px] md:w-[45px]"> {/*onHandleSubmit*/}
           <MagnifyingGlassIcon className="w-[100%] h-[27px] m-auto stroke-slate-900" />
         </button>
       </div>

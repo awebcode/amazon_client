@@ -122,7 +122,7 @@ const MainProducts = () => {
           </form> */}
           <h2 className="productsHeading">Home/Products</h2>
 
-          <div className="products grid grid-cols-3 xl:grid-cols-3.3 m-10">
+          <div className="products grid grid-cols-2 xl:grid-cols-3 m-10 gap-3">
             {productsx?.length <= 0 ? (
               <h1 className="text-center font-thin text-5xl absolute left-[30%] ">
                 OOPS! NO PRODUCTS FOUND!
@@ -140,6 +140,7 @@ const MainProducts = () => {
                   price={product.price}
                   ratings={product.ratings}
                   lessPrice={product.lessPrice}
+                  inStock={product.inStock}
                 />
               ))
             )}
@@ -156,9 +157,9 @@ const MainProducts = () => {
               max={25000}
             /> */}
             <div className="row sort my-5">
-              <span className="mr-2 text-center text-2xl">Sort By:</span>
+              <span className="mr-2 text-center text-[16px] md:text-2xl">Sort By:</span>
               <select
-                className="border-b-2 border-indigo-400 py-1 px-2 focus:outline-none focus:border-indigo-600"
+                className="text-sm border-b-2 border-indigo-400 py-1 px-2 focus:outline-none focus:border-indigo-600"
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
               >
@@ -172,7 +173,7 @@ const MainProducts = () => {
             </div>
 
             <Typography className="m-[20px]">
-              <Link to="/products" className="text-2xl">
+              <Link to="/products" className="text-[16px] md:text-2xl">
                 Categories
               </Link>
             </Typography>
@@ -186,7 +187,7 @@ const MainProducts = () => {
               {categories &&
                 categories.map((category, i) => (
                   <li
-                    className="category-link list-disc"
+                    className="category-link list-disc text-[8px] md:text-[16px]"
                     key={i}
                     onClick={() => setCategory(category.title)}
                   >
