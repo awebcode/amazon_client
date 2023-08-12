@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
-import "./category.css"
+import "./category.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { Avatar } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, createSearchParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeftIcon, ArrowRightIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 import { useGetProductCategoriesQuery } from "../../redux/categoryApi";
 const categories = [
   {
@@ -45,11 +49,11 @@ const categories = [
   },
 ];
 
-
-const CategorySidebar = ({ setOpen,user }) => {
+const CategorySidebar = ({ setOpen, user }) => {
+  const navigate = useNavigate();
   const [openSubcategories, setOpenSubcategories] = useState([]);
   const { data, isLoading, isError } = useGetProductCategoriesQuery();
-  
+
   const toggleSubcategories = (categoryName) => {
     setOpenSubcategories((prevOpenSubcategories) => {
       if (prevOpenSubcategories.includes(categoryName)) {
@@ -59,19 +63,37 @@ const CategorySidebar = ({ setOpen,user }) => {
       }
     });
   };
- 
+//search 
+  
+  const searchCategory = (category) => {
+    navigate({
+      pathname: "search",
+      search: `${createSearchParams({
+        category: `${category}`,
+        searchTerm: ``,
+      })}`,
+    });
+  };
   return (
     <div className="category-sidebar">
       <div className="category-head">
-        <Avatar src={user?.avatar?.url}  />
-        {user ? <Link to="/account">Account</Link> : <Link to="/signin">Hello, Sign In</Link>}
+        <Avatar src={user?.avatar?.url} />
+        {user ? (
+          <Link to="/account">Account</Link>
+        ) : (
+          <Link to="/signin">Hello, Sign In</Link>
+        )}
       </div>
       <div className="category-header">Digital Content & Devices</div>
       <ul className="category-list">
         {categories.map((category, index) => (
           <li className="category-item" key={index}>
             <div
-              onClick={() => toggleSubcategories(category.name)}
+              onClick={() => {
+                toggleSubcategories(category.name);
+                // navigate("/products");
+                searchCategory(category.name);
+              }}
               className="category-title"
             >
               {category.name}{" "}
@@ -89,7 +111,11 @@ const CategorySidebar = ({ setOpen,user }) => {
               category.subcategories.length > 0 && (
                 <ul className="sub-category-list">
                   {category.subcategories.map((subcategory, subIndex) => (
-                    <li className="sub-category-item" key={subIndex}>
+                    <li
+                      className="sub-category-item"
+                      key={subIndex}
+                      onClick={() => searchCategory(category.name)}
+                    >
                       {subcategory}
                     </li>
                   ))}

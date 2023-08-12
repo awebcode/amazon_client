@@ -131,7 +131,9 @@ const NavBar = () => {
           <Link to="/products">Products</Link>
         </div>
         <div>Customer Service</div>
-        <div>Registry</div>
+        <div>
+          <Link to="https://adminamazon.vercel.app/">Admin Pannel</Link>
+        </div>
         <div>Gift Cards</div>
         <div>Sell</div>
       </div>

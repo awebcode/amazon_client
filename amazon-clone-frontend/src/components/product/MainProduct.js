@@ -93,6 +93,11 @@ const MainProducts = () => {
     
   return (
     <Fragment>
+      {!products && (
+        <h1 className="text-center font-thin text-5xl absolute left-[30%] p-10 md:font-5xl font-2xl ">
+          OOPS! NO PRODUCTS FOUND!
+        </h1>
+      )}
       {loading ? (
         <h1 className="text-center text-5xl font-thin p-6">Plese Wait......🥰</h1>
       ) : (
@@ -171,7 +176,13 @@ const MainProducts = () => {
                 Categories
               </Link>
             </Typography>
+
             <ul className="categoryBox">
+              {!categories && (
+                <h1 className="text-center font-thin text-1xl  pt-10 md:text-3xl">
+                  OOPS! NO Categories FOUND!
+                </h1>
+              )}
               {categories &&
                 categories.map((category, i) => (
                   <li

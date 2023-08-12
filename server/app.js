@@ -28,8 +28,10 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(fileupload());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
   })
 );
 app.use(cookieparser());
@@ -45,10 +47,10 @@ app.use("/api/v1", commentReactRouter);
 app.use("/api/v1", conversationsRouter);
 app.use("/api/v1", messageRouter);
 // //hosting
-app.use(express.static(path.join(__dirname, "./amazon-clone-frontend/build")));
+// app.use(express.static(path.join(__dirname, "./amazon-clone-frontend/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./amazon-clone-frontend/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./amazon-clone-frontend/build/index.html"));
+// });
 app.use(error);
 export default app;

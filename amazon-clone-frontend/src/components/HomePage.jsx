@@ -92,11 +92,14 @@ const HomePage = () => {
     <div className="bg-amazonclone-background">
       {/* <CarouselCategory /> */}
       <div className="min-w-full max-w-lg m-auto p-5 md:p-20 md:pt-0">
-        <Carousel />
+        <CarouselCategory2 />
         <div className="relative">
           <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
             Best Sales Products
           </h1>
+          {!data?.products && (
+            <h2 className="text-center font-bold">No Products Available</h2>
+          )}
         </div>
         <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
           {data &&
@@ -126,12 +129,15 @@ const HomePage = () => {
         {/* sec2 */}
         <div className="relative">
           <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
-            Popular products
+            Popular Products
           </h1>
+          {!data2?.products && (
+            <h2 className="text-center font-bold">No Products Available</h2>
+          )}
         </div>
         <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
           {data2 &&
-            data2.products.slice(8,16).map((data, i) => {
+            data2.products.slice(8, 16).map((data, i) => {
               return (
                 <HomePageCard
                   data={data}
@@ -151,27 +157,30 @@ const HomePage = () => {
         {/* start Featured products */}
         <div className="relative">
           <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
-            Featured products
+            Featured Products
           </h1>
+          {!data2?.products && (
+            <h2 className="text-center font-bold">No Products Available</h2>
+          )}
         </div>
         <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
-        {data2 &&
-          data2.products.slice(4,12).map((data, i) => {
-            return (
-              <HomePageCard
-                data={data}
-                key={i}
-                sold={data.sold}
-                title={data.title}
-                description={data.description}
-                img={data.images}
-                price={data.price}
-                ratings={data.ratings}
-                lessPrice={data.lessPrice}
-              />
-            );
-          })}
-          </div>
+          {data2 &&
+            data2.products.slice(4, 12).map((data, i) => {
+              return (
+                <HomePageCard
+                  data={data}
+                  key={i}
+                  sold={data.sold}
+                  title={data.title}
+                  description={data.description}
+                  img={data.images}
+                  price={data.price}
+                  ratings={data.ratings}
+                  lessPrice={data.lessPrice}
+                />
+              );
+            })}
+        </div>
         <CarouselProduct />
         <CarouselCategory2 />
         <div className="h-[200px]">
