@@ -32,8 +32,8 @@ app.use(
   cors({
     origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
     credentials: true,
-    // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    // allowedHeaders: "Content-Type,Authorization",
+     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    
   })
 );
 
