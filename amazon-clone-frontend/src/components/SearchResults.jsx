@@ -100,11 +100,6 @@ const SearchResults = () => {
   return (
     <>
       {" "}
-      {!products && (
-        <h1 className="p-6 md:p-20 font-bold text-center  text-2xl md:text-5xl  ">
-          OOPS! NO PRODUCTS FOUND FOR THIS CATEGORY!😭
-        </h1>
-      )}
       <div className="min-w-[1200px] max-w-[1300px] m-auto pt-4 h-auto">
         {products &&
           products.map((product, key) => {
@@ -124,12 +119,18 @@ const SearchResults = () => {
                       <div className="text-xl xl:text-2xl pt-1">
                         {GB_CURRENCY.format(product.price)}
                       </div>
+                      <button className="btn">Add To Cart</button>
                     </div>
                   </div>
                 </div>
               </Link>
             );
           })}
+        {!products && (
+          <h1 className="p-6 md:p-20 font-bold text-center  text-2xl md:text-5xl  ">
+            OOPS! NO PRODUCTS FOUND FOR THIS CATEGORY!😭
+          </h1>
+        )}
       </div>
     </>
   );

@@ -86,7 +86,7 @@ const products = [
 
 const HomePage = () => {
   const { data, isFetching, isLoading, isError, isSuccess } = useGetProductQuery();
-  const { data:data2 } = useGetAllProductQuery();
+  const { data:data2,isLoading:isLoading2 } = useGetAllProductQuery();
   console.log("dataserver",data?.products)
   return (
     <div className="bg-amazonclone-background">
@@ -97,9 +97,12 @@ const HomePage = () => {
           <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
             Best Sales Products
           </h1>
-          {!data?.products && (
-            <h2 className="text-center font-bold">No Products Available</h2>
-          )}
+          {!data?.products &&
+            (isLoading ? (
+              <h2 className="text-center font-bold">Loading.........</h2>
+            ) : (
+              <h2 className="text-center font-bold">No Products Available</h2>
+            ))}
         </div>
         <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
           {data &&
@@ -131,9 +134,12 @@ const HomePage = () => {
           <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
             Popular Products
           </h1>
-          {!data2?.products && (
-            <h2 className="text-center font-bold">No Products Available</h2>
-          )}
+          {!data2?.products &&
+            (isLoading2 ? (
+              <h2 className="text-center font-bold">Loading.........</h2>
+            ) : (
+              <h2 className="text-center font-bold">No Products Available</h2>
+            ))}
         </div>
         <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
           {data2 &&
@@ -159,9 +165,12 @@ const HomePage = () => {
           <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
             Featured Products
           </h1>
-          {!data2?.products && (
-            <h2 className="text-center font-bold">No Products Available</h2>
-          )}
+          {!data2?.products &&
+            (isLoading2 ? (
+              <h2 className="text-center font-bold">Loading.........</h2>
+            ) : (
+              <h2 className="text-center font-bold">No Products Available</h2>
+            ))}
         </div>
         <div className="grid grid-cols-3 xl:grid-cols-4 gap-0">
           {data2 &&

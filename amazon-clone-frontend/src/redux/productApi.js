@@ -15,6 +15,7 @@ export const Product = createApi({
         url: "/create", // Replace with your actual register endpoint
         method: "POST",
         body: productData,
+        credentials: "include",
       }),
       invalidatesTags: ["Product"],
     }),
@@ -24,6 +25,7 @@ export const Product = createApi({
         url: `/update/${productData.id}`, // Replace with your actual register endpoint
         method: "PUT",
         body: productData,
+        credentials: "include",
       }),
       invalidatesTags: ["Product"],
     }),
@@ -33,6 +35,7 @@ export const Product = createApi({
       query: (userData) => ({
         url: "/get", // Replace with your actual login endpoint
         method: "GET",
+        credentials: "include",
       }),
       providesTags: ["Product"],
     }),
@@ -40,6 +43,7 @@ export const Product = createApi({
       query: (userData) => ({
         url: "/get-all", // Replace with your actual login endpoint
         method: "GET",
+        credentials: "include",
       }),
       providesTags: ["Product"],
     }),
@@ -47,6 +51,7 @@ export const Product = createApi({
       query: (id) => ({
         url: `/get-details/${id}`, // Replace with your actual login endpoint
         method: "GET",
+        credentials: "include",
       }),
       providesTags: ["Product"],
     }),
@@ -54,6 +59,7 @@ export const Product = createApi({
       query: (id) => ({
         url: `/get-details/${id}`, // Replace with your actual login endpoint
         method: "GET",
+        credentials: "include",
       }),
       providesTags: ["Product"],
     }),

@@ -10,11 +10,12 @@ export const Categories = createApi({
   tagTypes: ["Categories"], // Set your API base URL
   endpoints: (builder) => ({
     // Register endpoint
-   
+
     getProductCategories: builder.query({
       query: () => ({
         url: `/get`, // Replace with your actual login endpoint
         method: "GET",
+        credentials: "include",
       }),
       providesTags: ["Categories"],
     }),

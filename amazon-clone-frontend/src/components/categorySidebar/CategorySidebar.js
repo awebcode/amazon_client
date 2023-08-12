@@ -114,7 +114,7 @@ const CategorySidebar = ({ setOpen, user }) => {
                     <li
                       className="sub-category-item"
                       key={subIndex}
-                      onClick={() => searchCategory(category.name)}
+                      onClick={() => searchCategory(subcategory)}
                     >
                       {subcategory}
                     </li>
