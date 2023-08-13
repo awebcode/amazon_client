@@ -20,13 +20,7 @@ const __dirname = path.resolve();
 const app = express();
 
 app.use(error);
-app.use(
-  cors({
-    origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
-    credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  })
-);
+
 app.use(express());
 
 app.use(express.json({ limit: "500mb" }));
@@ -37,7 +31,14 @@ app.use(fileupload());
 app.use(cookieparser());
 
 
-
+app.use(
+  cors({
+    origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
 app.use("/api/v1", userRouter);
 app.use("/api/v1", productRouter);
 app.use("/api/v1", categoryRouter);

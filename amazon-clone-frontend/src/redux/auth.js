@@ -6,6 +6,9 @@ export const auth = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_SERVER_URL}/api/v1`,
     credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
   }),
   tagTypes: ["Auth"], // Set your API base URL
   endpoints: (builder) => ({
@@ -16,6 +19,9 @@ export const auth = createApi({
         method: "POST",
         body: userData,
         credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }),
       invalidatesTags: ["Auth"],
     }),
@@ -26,6 +32,9 @@ export const auth = createApi({
         method: "POST",
         body: userData,
         credentials: "include",
+         headers: {
+      "Content-Type": "application/json",
+    },
       }),
       invalidatesTags: ["Auth"],
     }),
@@ -34,6 +43,9 @@ export const auth = createApi({
         url: "/me", // Replace with your actual login endpoint
         method: "GET",
         credentials: "include",
+         headers: {
+          "Content-Type": "application/json",
+    },
       }),
       providesTags: ["Auth"],
     }),
