@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./category.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { Avatar } from "@mui/material";
@@ -49,10 +49,12 @@ const categories = [
   },
 ];
 
-const CategorySidebar = ({ setOpen, user }) => {
+const CategorySidebar = ({ setOpen, user,open }) => {
   const navigate = useNavigate();
   const [openSubcategories, setOpenSubcategories] = useState([]);
   const { data, isLoading, isError } = useGetProductCategoriesQuery();
+
+  
 
   const toggleSubcategories = (categoryName) => {
     setOpenSubcategories((prevOpenSubcategories) => {
@@ -63,8 +65,7 @@ const CategorySidebar = ({ setOpen, user }) => {
       }
     });
   };
-//search 
-  
+
   const searchCategory = (category) => {
     navigate({
       pathname: "search",
@@ -74,8 +75,27 @@ const CategorySidebar = ({ setOpen, user }) => {
       })}`,
     });
   };
+
+  const sidebarRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener when the component mounts
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setOpen]);
+
   return (
-    <div className="category-sidebar">
+    <div className={`category-sidebar ${open ? 'open' : 'close'}`} ref={sidebarRef}>
       <div className="category-head">
         <Avatar src={user?.avatar?.url} />
         {user ? (
@@ -93,10 +113,10 @@ const CategorySidebar = ({ setOpen, user }) => {
                 toggleSubcategories(category.name);
                 // navigate("/products");
                 searchCategory(category.name);
+                setOpen(false);
               }}
               className="category-title"
             >
-              
               {category.name}{" "}
               <span>
                 {category.subcategories.length > 0 && (
@@ -115,7 +135,10 @@ const CategorySidebar = ({ setOpen, user }) => {
                     <li
                       className="sub-category-item"
                       key={subIndex}
-                      onClick={() => searchCategory(subcategory)}
+                      onClick={() => {
+                        searchCategory(subcategory);
+                        setOpen(false);
+                      }}
                     >
                       {subcategory}
                     </li>

@@ -1,18 +1,45 @@
 
+/* Define the keyframes animation */
+@keyframes slideIn {
+  from {
+    left: -250px; /* Start offscreen to the left */
+  }
+  to {
+    left: 0; /* Slide in when open */
+  }
+}
+@keyframes slideOut {
+  from {
+    left: 0px; /* Start offscreen to the left */
+  }
+  to {
+    left: -250px; /* Slide in when open */
+  }
+}
+
+/* Apply the animation to the .category-sidebar.open class */
 .category-sidebar {
   background-color: #FFFFFF;
   position: fixed;
-  left: 0px;
+  left: -250px; /* Start offscreen to the left */
   top: -10px;
-  bottom: 0%;
+  bottom: 0;
   height: 100%;
   width: 250px;
   padding: 20px;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1000;
-  transition: all 0.8s ease;
+  transition: left 0.8s ease;
 }
+
+.category-sidebar.open {
+  animation: slideIn 0.8s ease forwards; /* Apply the animation when open */
+}
+.category-sidebar.close {
+  animation: slideOut 0.8s ease backwards; /* Apply the animation when open */
+}
+
 .category-sidebar .category-title{
   display: flex;
   justify-content: space-between;

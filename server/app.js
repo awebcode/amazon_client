@@ -28,17 +28,18 @@ app.use(express.urlencoded({ limit: "500mb" }));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(fileupload());
-app.use(cookieparser());
+
 
 
 app.use(
   cors({
     origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
     credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
+    // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    // allowedHeaders: "Content-Type,Authorization",
   })
 );
+app.use(cookieparser());
 app.use("/api/v1", userRouter);
 app.use("/api/v1", productRouter);
 app.use("/api/v1", categoryRouter);

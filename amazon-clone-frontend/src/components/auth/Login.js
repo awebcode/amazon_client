@@ -32,6 +32,7 @@ const LoginForm = () => {
       });
 
       if (response.data) {
+        console.log(response)
         // You can set your token in the cookies here
         // Cookies.set("token", response.data.token);
 

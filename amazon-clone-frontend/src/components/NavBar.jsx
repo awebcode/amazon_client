@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Search } from "./";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CategorySidebar from "./categorySidebar/CategorySidebar";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useUserContext } from "../redux/UserContext";
@@ -16,7 +16,10 @@ const NavBar = () => {
   const [sidebar, setSidebar] = useState(false)
   const { user } = useUserContext();
   const { data, isLoading, isError } = useGetProductCategoriesQuery();
+   
+   
   
+
   return (
     <header className="bg-amazonclone">
       <div className="flex justify-between items-center py-1 md:py-2 px-4 md:px-10 lg:px-16 xl:px-20">
@@ -118,16 +121,18 @@ const NavBar = () => {
         </div>
       </div>
       <div className="flex bg-amazonclone-light_blue text-white text-xs md:text-sm py-2 px-4 md:px-10 lg:px-16 xl:px-20 space-x-3">
-        <div className="flex items-center">
+        <div className="flex items-center cursor-pointer">
           {sidebar ? (
-            <CloseIcon onClick={() => setSidebar(false)} className="h-6 w-6" />
+            <CloseIcon  onClick={() => setSidebar(false)} className="h-6 w-6" />
           ) : (
             <MenuIcon onClick={() => setSidebar(true)} className="h-6 w-6" />
           )}
-          <span onClick={() => setSidebar(!sidebar)} isOpen={sidebar} className="ml-2">
+          <span onClick={() => setSidebar(!sidebar)}  isOpen={sidebar} className="ml-2">
             All
           </span>
-          {sidebar && <CategorySidebar setOpen={setSidebar} user={user} />}
+          {sidebar && (
+            <CategorySidebar setOpen={setSidebar} user={user} open={sidebar}  />
+          )}
         </div>
         <div className="text-[8px] md:text-[16px] ">Today's Deals</div>
         <div className="text-[8px] md:text-[16px] ">

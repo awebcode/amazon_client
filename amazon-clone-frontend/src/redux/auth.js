@@ -33,7 +33,7 @@ export const auth = createApi({
         body: userData,
         credentials: "include",
          headers: {
-      "Content-Type": "application/json",
+             "Content-Type": "application/json",
     },
       }),
       invalidatesTags: ["Auth"],
