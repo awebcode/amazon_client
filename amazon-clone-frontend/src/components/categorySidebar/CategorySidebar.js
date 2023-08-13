@@ -113,7 +113,7 @@ const CategorySidebar = ({ setOpen, user,open }) => {
                 toggleSubcategories(category.name);
                 // navigate("/products");
                 searchCategory(category.name);
-                setOpen(false);
+                // setOpen(false);
               }}
               className="category-title"
             >
