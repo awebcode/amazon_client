@@ -1,4 +1,4 @@
-import { EyeIcon, HeartIcon, ShoppingCartIcon, StarIcon } from "@heroicons/react/24/outline";
+import { EyeIcon, HeartIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import "./card.css"
 import { addToCart, addToWishlist, removeFromCart, removeFromWishlist } from "../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ReactHtmlParser from "react-html-parser";
 import ShoppingCartIconFill from "@mui/icons-material/ShoppingCart";
 import { useEffect, useState } from "react";
+import StarIcon from "@mui/icons-material/Star";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
 const HomePageCard = ({ data, title, img, description, ratings, price, lessPrice, sold,inStock }) => {
  const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -70,7 +72,7 @@ useEffect(() => {
 }, [isMobile]);
    return (
      <div className="border-spacing-2.5">
-       <div className="card-x h-[200px] w-full  md:h-[480px] bg-white z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105">
+       <div className="card-x h-[200px] w-full  md:h-[380px] bg-white z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105">
          <div className="m-auto flex items-center  ml-[-8px] h-[100px] w-full md:h-[180px]  md:w-full p-4">
            <img
              className="object-contain h-[100%] w-full"
@@ -81,18 +83,16 @@ useEffect(() => {
 
          <div className="text-[10px] md:text-lg xl:text-xl font-semibold ml-4 mt-2 md:mt-4">
            <Link to={`/product/${data._id}`}>
-             {isMobile
-               ? title.slice(0, 60) + " See More..."
-               : title.slice(0, 150) + " See More..."}
+             {isMobile ? title.slice(0, 25) + "..." : title.slice(0, 25) + "..."}
            </Link>
          </div>
 
-         <div className="truncate md:truncate-none text-[8px] md:text-xs xl:text-sm font-light ml-4">
+         <div className="text-[8px] md:text-xs xl:text-sm font-light ml-4">
            <h3>
              <Link to={`/product/${data._id}`}>
                {isMobile
-                 ? ReactHtmlParser(description.slice(0, 40) + " see more...")
-                 : ReactHtmlParser(description.slice(0, 130) + " see more...")}
+                 ? ReactHtmlParser(description.slice(0, 30) + "...")
+                 : ReactHtmlParser(description.slice(0, 35) + "...")}
              </Link>
            </h3>
          </div>
@@ -101,11 +101,19 @@ useEffect(() => {
            <StarIcon className="h-[12px] md:h-[25px] mb-1 md:mb-3 text-[10px] md:text-[16px]" />{" "}
            {ratings}5 Ratings
          </div> */}
-
-         <div className="text-[10px] md:text-lg xl:text-xl font-light md:ml-4 m-2 md:mt-3 flex justify-between p-2 md:p-5">
+         <div className="text-[10px] md:text-lg xl:text-xl font-light md:ml-1 m-1 md:mt-1 flex justify-start p-1 md:p-2">
+           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
+           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
+           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
+           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
+           <StarHalfIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
+         </div>
+         <div className="text-[10px] md:text-lg xl:text-xl font-light md:ml-2 m-1 md:mt-3 flex justify-between p-2 md:p-3">
            <span>
              Price: $<b>{price}</b>
-             <sup>{lessPrice}</sup>
+             <sup>
+               <s className="text-red-500">$1066</s>
+             </sup>
            </span>
            <span>
              InStock: $

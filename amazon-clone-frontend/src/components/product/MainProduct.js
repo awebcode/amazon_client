@@ -38,16 +38,9 @@ const MainProducts = () => {
 
   const [ratings, setRatings] = useState(0);
   const [sort, setSort] = useState("");
-  // const {
-  //   // products,
-  //   // loading,
-  //   error,
-  //   productsCount,
-  //   resultPerPage,
-  //   filteredProductsCount,
-  // } = useSelector((state) => state.products);
+  
   const [keywords, setKeyword] = useState("");
-// console.log("products",products)
+
   const keyword = params.keyword; //this is for params search for /:keyword
   const navigate = useNavigate();
   const searchSubmitHandler = (e) => {
@@ -102,24 +95,7 @@ const MainProducts = () => {
         <h1 className="text-center text-5xl font-thin p-6">Plese Wait......🥰</h1>
       ) : (
         <Fragment>
-          {/* <MetaData title="PRODUCTS -- ECOMMERCE" /> */}
-
-          {/* <div className="searchBoxx">
-            <input
-              type="text"
-              placeholder="Search a Product ..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value.toLowerCase())}
-            />
-          </div> */}
-          {/* <form className="searchBoxInProduct" onSubmit={searchSubmitHandler}>
-            <input
-              type="text"
-              placeholder="Search a Product ..."
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <input type="submit" value="Search" />
-          </form> */}
+         
           <h2 className="productsHeading">Home/Products</h2>
 
           <div className="products grid grid-cols-2 xl:grid-cols-3 m-10 gap-3">

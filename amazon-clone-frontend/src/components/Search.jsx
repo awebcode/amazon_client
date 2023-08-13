@@ -20,25 +20,46 @@ const Search = () => {
   const categories = data?.categories || [];
   const suggestionContainerRef = useRef(null);
 
-  useEffect(() => {
-    if (category === "All") {
-      if (searchTerm === "") {
-        // setSuggestions(products.slice(0, numToShow));
-      } else {
-        const matchingSuggestions = products.filter((product) =>
-          product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setSuggestions(matchingSuggestions.slice(0, numToShow));
-      }
-    } else {
-      const matchingSuggestions = products.filter(
-        (product) =>
-          product.category === category &&
-          product.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSuggestions(matchingSuggestions.slice(0, numToShow));
-    }
-  }, [searchTerm, category, products, numToShow]);
+  // useEffect(() => {
+  //   if (category === "All") {
+  //     if (searchTerm === "") {
+  //       //  setSuggestions(products.slice(0, numToShow));
+  //       setSuggestions([]);
+  //     } else {
+  //       const matchingSuggestions = products.filter((product) =>
+  //         product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //       );
+  //        setSuggestions(matchingSuggestions.slice(0, numToShow));
+  //     }
+  //   } else {
+  //     const matchingSuggestions = products.filter(
+  //       (product) =>
+  //         product.category === category &&
+  //         product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //       setSuggestions(matchingSuggestions.slice(0, numToShow));
+  //   }
+  // }, [searchTerm, category, products, numToShow]);
+  
+useEffect(() => {
+  if (searchTerm === "") {
+    setSuggestions([]);
+  } else if (category === "All") {
+    const matchingSuggestions = products.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSuggestions(matchingSuggestions.slice(0, numToShow));
+  } else {
+    const matchingSuggestions = products.filter(
+      (product) =>
+        product.category === category &&
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSuggestions(matchingSuggestions.slice(0, numToShow));
+  }
+}, [searchTerm, category, products, numToShow]);
+
+
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
@@ -97,14 +118,19 @@ const searchCategory = (category) => {
         ref={suggestionContainerRef}
       >
         <select
+          
           onChange={(e) => {
             setCategory(e.target.value);
           }}
-          className="w-[35px] md:w-auto  bg-gray-300 text-black border text-xs xl:text-sm text-[10px] md:text[25px] h-[100%]"
+          className="w-[18%] md:w-[9%]  bg-gray-300 text-black border  text-[10px] md:text-[12px] h-[100%] select-text"
         >
           <option value="All">All</option>
           {categories.map((v, u) => (
-            <option className="border-none p-2" value={v.title} key={u}>
+            <option
+              className="border-none p-2 text-[10px] md:text-[16px]"
+              value={v.title}
+              key={u}
+            >
               {v.title}
             </option>
           ))}
@@ -116,10 +142,12 @@ const searchCategory = (category) => {
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
-          onFocus={handleInputFocus}
+          // onFocus={handleInputFocus}
         />
-        <button onClick={searchCategory} className="w-[16px] md:w-[45px]"> {/*onHandleSubmit*/}
-          <MagnifyingGlassIcon className="w-[100%] h-[27px] m-auto stroke-slate-900" />
+        <button onClick={searchCategory} className="w-[16px] md:w-[45px]">
+          {" "}
+          {/*onHandleSubmit*/}
+          <MagnifyingGlassIcon className="w-[100%] h-[27px] m-auto stroke-purple-500 text-purple-500" />
         </button>
       </div>
       {suggestions.length > 0 && (

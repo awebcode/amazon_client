@@ -3,7 +3,7 @@ import { ProductBadge, ProductRatings } from "./";
 const ProductDetails = ({ product, ratings }) => {
   return (
     <div className="mb-1">
-      <div className="text-xl xl:text-2xl font-medium mb-1">
+      <div className="text-[12px] md:text-2xl font-medium mb-1">
         {product.title}
       </div>
       <div className="text-sm xl:text-base mb-1">

@@ -10,61 +10,30 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useUserContext } from "../redux/UserContext";
 import { useGetProductCategoriesQuery } from "../redux/categoryApi";
 import axios from "axios";
+import DropdownProfile from "./menu/Menu";
 const NavBar = () => {
   const cart = useSelector((state) => state.cart.cart.productsNumber);
   const wishlist = useSelector((state) => state.wishlist.wishlist.productsNumber);
-  const [sidebar, setSidebar] = useState(false)
+  const [sidebar, setSidebar] = useState(false);
   const { user } = useUserContext();
   const { data, isLoading, isError } = useGetProductCategoriesQuery();
-   
-   
-  
 
   return (
     <header className="bg-amazonclone">
-      <div className="flex justify-between items-center py-1 md:py-2 px-4 md:px-10 lg:px-16 xl:px-20">
+      <div className="max-w-[100vw] flex flex-wrap justify-between items-center py-1 md:py-2 px-4 md:px-10 lg:px-16 xl:px-20">
         {/* Left */}
-        <div className="flex items-center">
+        <div className="flex flex-[10%] items-center">
           <Link to={"/"}>
-            {user?.avatar?.url ? (
-              <img
-                className="h-6 w-6 md:h-9 md:w-9 rounded"
-                src={user?.avatar?.url}
-                alt="Amazon logo"
-              />
-            ) : (
-              <span className="text-[16px] md:text-3xl text-white">Amazon</span>
-            )}
+            <span className="text-[16px] md:text-3xl text-white">Amazon</span>
           </Link>
-          <div className="ml-3 hidden md:block text-white">
-            <div className="text-xs md:text-sm">Deliver to {user?.name}</div>
-            <div className="text-sm md:text-base font-bold">United Kingdom</div>
-          </div>
         </div>
         {/* Middle */}
-        <div className=" md:flex flex-grow items-center ml-4">
+        <div className="flex-[60%] md:flex flex-grow items-center ml-4">
           <Search />
         </div>
         {/* Right */}
 
-        <div className="flex items-center text-white">
-          <div className="pr-4 pl-4 hidden md:block">
-            <div className="text-xs xl:text-sm">
-              {user ? (
-                <span>{user?.email}</span>
-              ) : (
-                <Link to="/signin">Hello, sign in</Link>
-              )}
-            </div>
-            <div className="text-sm xl:text-base font-bold">Accounts & Lists</div>
-          </div>
-          <div className="pr-4 pl-4 hidden md:block">
-            <div className="text-xs xl:text-sm">
-              <Link to="/products">Products</Link>
-            </div>
-            <div className="text-sm xl:text-base font-bold">& Orders</div>
-          </div>
-
+        <div className="flex flex-[10%] items-center justify-end text-white">
           <Link
             to={"/message"}
             className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
@@ -87,52 +56,60 @@ const NavBar = () => {
               </svg>
 
               <div className="relative">
-                <div className="absolute text-[12px] md:text-[13px] right-[-25px] top-[-14px] font-bold m-2 text-orange-400">
+                <div className="absolute   right-[-22px] top-[-20px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[2px] p-[1px] rounded">
                   20
                 </div>
               </div>
-              {/* <div className="mt-7 text-xs xl:text-sm font-bold">Wishlist</div> */}
             </div>
           </Link>
-          <Link to={"/wishlist"} className="ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10">
+          <Link
+            to={"/wishlist"}
+            className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+          >
             {/* ... Wishlist icon and count ... */}
             <div className="flex pr-3 pl-3">
               <HeartIcon className="h-[16px] md:h-[28px]  text-white" />
               <div className="relative">
-                <div className="absolute text-[12px] md:text-[13px] right-[-20px] top-[-16px] font-bold m-2 text-orange-400">
+                <div className="absolute   right-[-20px] top-[-24px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
                   {wishlist}
                 </div>
               </div>
               {/* <div className="mt-7 text-xs xl:text-sm font-bold">Wishlist</div> */}
             </div>
           </Link>
-          <Link to={"/cart"} className="ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10">
+          <Link
+            to={"/cart"}
+            className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+          >
             {/* ... Cart icon and count ... */}
             <div className="flex pr-3 pl-3">
               <ShoppingCartIcon className="h-[16px] md:h-[28px] text-white" />
               <div className="relative">
-                <div className="absolute right-[-25px] top-[-18px] font-bold m-2 text-orange-400 text-[12px] md:text-[13px]">
+                <div className="absolute right-[-22px] top-[-22px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
                   {cart}
                 </div>
               </div>
               {/* <div className="mt-7 text-xs xl:text-sm font-bold">Cart</div> */}
             </div>
           </Link>
+          <Link to={"#"} className="ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10">
+            {/* ... Cart icon and count ... */}
+            <DropdownProfile />
+          </Link>
         </div>
       </div>
+
       <div className="flex bg-amazonclone-light_blue text-white text-xs md:text-sm py-2 px-4 md:px-10 lg:px-16 xl:px-20 space-x-3">
         <div className="flex items-center cursor-pointer">
           {sidebar ? (
-            <CloseIcon  onClick={() => setSidebar(false)} className="h-6 w-6" />
+            <CloseIcon onClick={() => setSidebar(false)} className="h-6 w-6" />
           ) : (
             <MenuIcon onClick={() => setSidebar(true)} className="h-6 w-6" />
           )}
-          <span onClick={() => setSidebar(!sidebar)}  isOpen={sidebar} className="ml-2">
+          <span onClick={() => setSidebar(!sidebar)} isOpen={sidebar} className="ml-2">
             All
           </span>
-          {sidebar && (
-            <CategorySidebar setOpen={setSidebar} user={user} open={sidebar}  />
-          )}
+          {sidebar && <CategorySidebar setOpen={setSidebar} user={user} open={sidebar} />}
         </div>
         <div className="text-[8px] md:text-[16px] ">Today's Deals</div>
         <div className="text-[8px] md:text-[16px] ">

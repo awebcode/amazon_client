@@ -34,9 +34,9 @@ app.use(fileupload());
 app.use(
   cors({
     origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
+
     credentials: true,
-    // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    // allowedHeaders: "Content-Type,Authorization",
+    //https://amazonecommerceapp.vercel.app
   })
 );
 app.use(cookieparser());
