@@ -28,7 +28,7 @@ const NavBar = () => {
           </Link>
         </div>
         {/* Middle */}
-        <div className="flex-[60%] md:flex flex-grow items-center ml-4">
+        <div className="flex-[50%] md:flex flex-grow items-center ml-4">
           <Search />
         </div>
         {/* Right */}

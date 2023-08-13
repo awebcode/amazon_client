@@ -88,7 +88,7 @@ const MainProducts = () => {
     <Fragment>
       {!products && (
         <h1 className="text-center font-thin text-5xl absolute left-[30%] p-10 md:font-5xl font-2xl ">
-          OOPS! NO PRODUCTS FOUND!
+            NO PRODUCTS FOUND!
         </h1>
       )}
       {loading ? (
@@ -101,7 +101,7 @@ const MainProducts = () => {
           <div className="products grid grid-cols-2 xl:grid-cols-3 m-10 gap-3">
             {productsx?.length <= 0 ? (
               <h1 className="text-center font-thin text-5xl absolute left-[30%] ">
-                OOPS! NO PRODUCTS FOUND!
+               NO PRODUCTS FOUND!
               </h1>
             ) : (
               productsx &&
