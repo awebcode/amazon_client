@@ -6,7 +6,7 @@ import { Avatar, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useMeQuery } from '../../redux/auth';
 import { useEffect, useState } from 'react';
-
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 export default function DropdownProfile() {
     const { data, isLoading } = useMeQuery();
@@ -31,15 +31,32 @@ export default function DropdownProfile() {
   return (
     <Dropdown>
       <MenuButton className="mt-2">
-        <Tooltip title="Your Profile" placement='top'>
-          <Avatar
-            src={data?.user?.avatar?.url}
-            className="h-full w-full object-contain"
-            style={{
-              height: isMobile ? "22px" : "32px",
-              width: isMobile ? "22px" : "32px",
-            }}
-          />
+        <Tooltip title="Your Profile" placement="top">
+          {data && data.user ? (
+            <>
+              {" "}
+              <Avatar
+                src={data?.user?.avatar?.url}
+                className="h-full w-full object-contain"
+                style={{
+                  height: isMobile ? "22px" : "32px",
+                  width: isMobile ? "22px" : "32px",
+                }}
+              />
+            </>
+          ) : (
+            <>
+              {" "}
+              <AccountBoxIcon
+               
+                className="h-full w-full object-contain"
+                style={{
+                  height: isMobile ? "22px" : "32px",
+                  width: isMobile ? "22px" : "32px",
+                }}
+              />
+            </>
+          )}
         </Tooltip>
       </MenuButton>
       <Menu className="bg-white p-2" style={{ zIndex: "1000" }}>

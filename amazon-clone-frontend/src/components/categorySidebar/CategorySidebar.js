@@ -454,7 +454,7 @@ const CategorySidebar = ({ setOpen, user,open }) => {
                     key={index}
                     open={openSubCategorySidebar}
                     toggle={setOpenSubcategories}
-                    setOpen={setOpenSubCategorySidebar}
+                    setOpen={setOpen}
                     searchCategory={searchCategory}
                     sidebarRef={sidebarRef}
                     subcategories={category.subcategories}

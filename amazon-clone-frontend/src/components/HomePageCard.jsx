@@ -11,7 +11,10 @@ import { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import { Tooltip } from "@mui/material";
-const HomePageCard = ({ data, title, img, description, ratings, price, lessPrice, sold,inStock }) => {
+import ModalProduct from "./product/ModalProduct";
+
+const HomePageCard = ({cls, data, title, img, description, ratings, price, lessPrice, sold, inStock }) => {
+  const [isOpen, setIsOpen] = useState(false);
  const dispatch = useDispatch();
   const Navigate = useNavigate();
  const isItemInCart = useSelector((state) =>
@@ -24,22 +27,22 @@ const isItemInWishList = useSelector((state) =>
  const addItemToCart = () => {
    if (isItemInCart) {
      toast.warning(`${data.title} is already in the cart.`);
-     Navigate("/cart");
+    //  Navigate("/cart");
    } else {
      dispatch(addToCart(data));
      toast.success(`${data.title} added to cart.`);
-     Navigate("/cart");
+    //  Navigate("/cart");
    }
  };
 
  const addItemToWishlist = () => {
    if (isItemInWishList) {
      toast.warning(`${data.title} already  added to wishlist.`);
-     Navigate("/wishlist");
+    //  Navigate("/wishlist");
    } else {
      dispatch(addToWishlist(data));
      toast.success(`${data.title} added to wishlist.`);
-     Navigate("/wishlist");
+    //  Navigate("/wishlist");
    }
   };
   
@@ -73,7 +76,7 @@ useEffect(() => {
 }, [isMobile]);
    return (
      <div className="border-spacing-2.5">
-       <div className="card-x h-[280px] w-full  md:h-[460px] bg-white z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105">
+       <div className={`card-x h-[305px] w-full ${cls && "h-[315px] md:h-[500px] md:w-full"} md:h-[480px] bg-white z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105`}>
          <div className="m-auto flex items-center  ml-[-8px] h-[180px] w-full md:h-[280px]  md:w-full p-4">
            <img
              className="object-contain h-[100%] w-full"
@@ -81,7 +84,9 @@ useEffect(() => {
              alt="Home card"
            />
          </div>
-
+         <div className="text-[12px] md:text-lg  font-semibold ml-4 mt-1 md:mt-1 cursor-pointer ">
+             Brand: <span className="text-green-400">Asus</span>
+         </div>
          <div className="text-[10px] md:text-lg xl:text-xl font-semibold ml-4 mt-2 md:mt-4">
            <Link to={`/product/${data._id}`}>
              {isMobile ? title.slice(0, 25) + "..." : title.slice(0, 25) + "..."}
@@ -126,11 +131,12 @@ useEffect(() => {
 
          <div className="card-hover absolute z-50 right-[10px] top-[30%] cursor-pointer">
            <div className="flex flex-col font-bold">
-             <Link to={`/product/${data._id}`}>
+             <Link onClick={() => setIsOpen(true)}>
                <Tooltip title="View This Product" placement="top">
                  <EyeIcon className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[16px]" />
                </Tooltip>
              </Link>
+             {isOpen && <ModalProduct isOpen={isOpen} setIsOpen={setIsOpen} img={img} />}
              {isItemInWishList ? (
                <Tooltip placement="top" title="Item added to your wishlist">
                  <HeartIcon

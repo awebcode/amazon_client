@@ -96,9 +96,9 @@ const MainProducts = () => {
       ) : (
         <Fragment>
          
-          <h2 className="productsHeading">Home/Products</h2>
+          <h2 className="text-center text-2xl md:text-5xl font-thin m-[20px]">Home/Products</h2>
 
-          <div className="products grid grid-cols-2 xl:grid-cols-3 m-10 gap-3">
+          <div className="products grid grid-cols-2 xl:grid-cols-4 m-0 gap-2">
             {productsx?.length <= 0 ? (
               <h1 className="text-center font-thin text-5xl absolute left-[30%] ">
                NO PRODUCTS FOUND!
@@ -107,6 +107,7 @@ const MainProducts = () => {
               productsx &&
               productsx.map((product, i) => (
                 <HomePageCard
+                  cls="cx"
                   key={product._id}
                   data={product}
                   sold={product.sold}

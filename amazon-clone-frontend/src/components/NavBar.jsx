@@ -34,14 +34,14 @@ const NavBar = () => {
         </div>
         {/* Right */}
 
-        <div className="flex flex-[10%] items-center justify-end text-white">
+        <div className="flex  items-center justify-end text-white space-x-4">
           <Tooltip title="Messages" placement="bottom">
             <Link
               to={"/message"}
-              className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+              className="hidden md:block ml-1 mr-1 md:mr-2 lg:mr-2 xl:mr-2"
             >
               {/* ... Message icon ... */}
-              <div className="flex pr-3 pl-3">
+              <div className="flex ml-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -68,10 +68,10 @@ const NavBar = () => {
           <Tooltip title="Wishlist">
             <Link
               to={"/wishlist"}
-              className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+              className="hidden md:block ml-2 mr-2 md:mr-2 lg:mr-2 xl:mr-2"
             >
               {/* ... Wishlist icon and count ... */}
-              <div className="flex pr-3 pl-3">
+              <div className="flex m-2">
                 <HeartIcon className="h-[16px] md:h-[28px]  text-white" />
                 <div className="relative">
                   <div className="absolute   right-[-20px] top-[-24px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
@@ -86,10 +86,10 @@ const NavBar = () => {
             {" "}
             <Link
               to={"/cart"}
-              className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+              className="hidden md:block ml-2 mr-4 md:mr-2 lg:mr-2 xl:mr-2"
             >
               {/* ... Cart icon and count ... */}
-              <div className="flex pr-3 pl-3">
+              <div className="flex m-2">
                 <ShoppingCartIcon className="h-[16px] md:h-[28px] text-white" />
                 <div className="relative">
                   <div className="absolute right-[-22px] top-[-22px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">

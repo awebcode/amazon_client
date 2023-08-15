@@ -89,7 +89,7 @@
 .products {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 12vmax;
+  padding: 0 2vmax 0 12vmax;
   justify-content: center;
   min-height: 40vh;
 }
@@ -177,10 +177,15 @@
 }
 
 @media screen and (max-width: 600px) {
+  .categoryBox{
+   
+   list-style: none !important;
+   list-style-type: none !important;
+  }
   .products{
     padding: 0px;
     flex-direction: row-reverse;
-    padding-left: 20px;
+    padding-left: 8vmax;
   }
   
   .filterBox {

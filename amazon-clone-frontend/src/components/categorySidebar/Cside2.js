@@ -84,10 +84,10 @@ const Cside2 = ({
             key={subIndex}
             onClick={() => {
               searchCategory(subcategory);
-              //   setOpen(false);
+              setOpen(false);
             }}
           >
-            <Link to="#">{subcategory}</Link>
+           {subcategory}
           </li>
         ))}
       </ul>
