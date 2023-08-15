@@ -10,6 +10,7 @@ import ShoppingCartIconFill from "@mui/icons-material/ShoppingCart";
 import { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
+import { Tooltip } from "@mui/material";
 const HomePageCard = ({ data, title, img, description, ratings, price, lessPrice, sold,inStock }) => {
  const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -72,8 +73,8 @@ useEffect(() => {
 }, [isMobile]);
    return (
      <div className="border-spacing-2.5">
-       <div className="card-x h-[200px] w-full  md:h-[380px] bg-white z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105">
-         <div className="m-auto flex items-center  ml-[-8px] h-[100px] w-full md:h-[180px]  md:w-full p-4">
+       <div className="card-x h-[280px] w-full  md:h-[460px] bg-white z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105">
+         <div className="m-auto flex items-center  ml-[-8px] h-[180px] w-full md:h-[280px]  md:w-full p-4">
            <img
              className="object-contain h-[100%] w-full"
              src={img[0].url || img}
@@ -126,29 +127,39 @@ useEffect(() => {
          <div className="card-hover absolute z-50 right-[10px] top-[30%] cursor-pointer">
            <div className="flex flex-col font-bold">
              <Link to={`/product/${data._id}`}>
-               <EyeIcon className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[16px]" />
+               <Tooltip title="View This Product" placement="top">
+                 <EyeIcon className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[16px]" />
+               </Tooltip>
              </Link>
              {isItemInWishList ? (
-               <HeartIcon
-                 className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[38px] text-rose-600"
-                 onClick={removeItemFromWishlist}
-               />
+               <Tooltip placement="top" title="Item added to your wishlist">
+                 <HeartIcon
+                   className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[38px] text-rose-600"
+                   onClick={removeItemFromWishlist}
+                 />
+               </Tooltip>
              ) : (
-               <HeartIcon
-                 className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[38px] outline-red-600"
-                 onClick={addItemToWishlist}
-               />
+               <Tooltip placement="top" title="Add item to your wishList.">
+                 <HeartIcon
+                   className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[38px] outline-red-600"
+                   onClick={addItemToWishlist}
+                 />
+               </Tooltip>
              )}
              {isItemInCart ? (
-               <ShoppingCartIcon
-                 className="h-[16px] md:h-[38px] mb-1 md:mb-3  text-rose-600"
-                 onClick={removeItemFromCart}
-               />
+               <Tooltip placement="top" title="Item added to your cart.">
+                 <ShoppingCartIcon
+                   className="h-[16px] md:h-[38px] mb-1 md:mb-3  text-rose-600"
+                   onClick={removeItemFromCart}
+                 />
+               </Tooltip>
              ) : (
-               <ShoppingCartIcon
-                 className="h-[16px] md:h-[38px] mb-1 md:mb-3"
-                 onClick={addItemToCart}
-               />
+               <Tooltip placement="top" title="Add item to your cart.">
+                 <ShoppingCartIcon
+                   className="h-[16px] md:h-[38px] mb-1 md:mb-3"
+                   onClick={addItemToCart}
+                 />
+               </Tooltip>
              )}
            </div>
          </div>
