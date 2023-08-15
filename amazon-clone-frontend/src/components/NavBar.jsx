@@ -11,6 +11,7 @@ import { useUserContext } from "../redux/UserContext";
 import { useGetProductCategoriesQuery } from "../redux/categoryApi";
 import axios from "axios";
 import DropdownProfile from "./menu/Menu";
+import { Tooltip } from "@mui/material";
 const NavBar = () => {
   const cart = useSelector((state) => state.cart.cart.productsNumber);
   const wishlist = useSelector((state) => state.wishlist.wishlist.productsNumber);
@@ -34,64 +35,71 @@ const NavBar = () => {
         {/* Right */}
 
         <div className="flex flex-[10%] items-center justify-end text-white">
-          <Link
-            to={"/message"}
-            className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
-          >
-            {/* ... Message icon ... */}
-            <div className="flex pr-3 pl-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-[16px] md:h-[28px] text-white"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-                />
-              </svg>
+          <Tooltip title="Messages" placement="bottom">
+            <Link
+              to={"/message"}
+              className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+            >
+              {/* ... Message icon ... */}
+              <div className="flex pr-3 pl-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-[16px] md:h-[28px] text-white"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                  />
+                </svg>
 
-              <div className="relative">
-                <div className="absolute   right-[-22px] top-[-20px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[2px] p-[1px] rounded">
-                  20
+                <div className="relative">
+                  <div className="absolute   right-[-22px] top-[-20px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[2px] p-[1px] rounded">
+                    20
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-          <Link
-            to={"/wishlist"}
-            className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
-          >
-            {/* ... Wishlist icon and count ... */}
-            <div className="flex pr-3 pl-3">
-              <HeartIcon className="h-[16px] md:h-[28px]  text-white" />
-              <div className="relative">
-                <div className="absolute   right-[-20px] top-[-24px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
-                  {wishlist}
+            </Link>
+          </Tooltip>
+          <Tooltip title="Wishlist">
+            <Link
+              to={"/wishlist"}
+              className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+            >
+              {/* ... Wishlist icon and count ... */}
+              <div className="flex pr-3 pl-3">
+                <HeartIcon className="h-[16px] md:h-[28px]  text-white" />
+                <div className="relative">
+                  <div className="absolute   right-[-20px] top-[-24px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
+                    {wishlist}
+                  </div>
                 </div>
+                {/* <div className="mt-7 text-xs xl:text-sm font-bold">Wishlist</div> */}
               </div>
-              {/* <div className="mt-7 text-xs xl:text-sm font-bold">Wishlist</div> */}
-            </div>
-          </Link>
-          <Link
-            to={"/cart"}
-            className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
-          >
-            {/* ... Cart icon and count ... */}
-            <div className="flex pr-3 pl-3">
-              <ShoppingCartIcon className="h-[16px] md:h-[28px] text-white" />
-              <div className="relative">
-                <div className="absolute right-[-22px] top-[-22px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
-                  {cart}
+            </Link>
+          </Tooltip>
+          <Tooltip title="Cart">
+            {" "}
+            <Link
+              to={"/cart"}
+              className="hidden md:block ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10"
+            >
+              {/* ... Cart icon and count ... */}
+              <div className="flex pr-3 pl-3">
+                <ShoppingCartIcon className="h-[16px] md:h-[28px] text-white" />
+                <div className="relative">
+                  <div className="absolute right-[-22px] top-[-22px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
+                    {cart}
+                  </div>
                 </div>
+                {/* <div className="mt-7 text-xs xl:text-sm font-bold">Cart</div> */}
               </div>
-              {/* <div className="mt-7 text-xs xl:text-sm font-bold">Cart</div> */}
-            </div>
-          </Link>
+            </Link>
+          </Tooltip>
           <Link to={"#"} className="ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10">
             {/* ... Cart icon and count ... */}
             <DropdownProfile />

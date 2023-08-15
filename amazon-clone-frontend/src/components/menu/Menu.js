@@ -31,7 +31,7 @@ export default function DropdownProfile() {
   return (
     <Dropdown>
       <MenuButton className="mt-2">
-        <Tooltip title="Profile">
+        <Tooltip title="Your Profile" placement='top'>
           <Avatar
             src={data?.user?.avatar?.url}
             className="h-full w-full object-contain"
