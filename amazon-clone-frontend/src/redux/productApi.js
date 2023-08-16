@@ -65,11 +65,21 @@ export const Product = createApi({
     }),
 
     getProductByFilter: builder.query({
-      query: ({ keyword = "", sort, currentPage, category = "" }) => {
-        let link = `/get?keyword=${keyword}&sort=${sort}&page=${currentPage}`;
+      query: ({
+        keyword = "",
+        currentPage = 1,
+        category,
+        price = [0,0],
+        rating = 0,
+        sort,
+      }) => {
+        let link = `/get?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&sort=${sort}`;
 
         if (category) {
-          link = `/get?keyword=${keyword}&sort=${sort}&page=${currentPage}&category=${category}`;
+          link = `/get?keyword=${keyword}&page=${currentPage}&category=${category}&price[gte]=${price[0]}&price[lte]=${price[1]}&sort=${sort}`;
+        }
+        if (rating) {
+          link = `/get?keyword=${keyword}&page=${currentPage}&rating[gte]=${rating}&price[gte]=${price[0]}&price[lte]=${price[1]}&sort=${sort}`;
         }
 
         return link;

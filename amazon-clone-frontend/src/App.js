@@ -16,6 +16,10 @@ import MainProducts from "./components/product/MainProduct";
 import Details from "./components/product/Details";
 import HomeFooter from "./components/Footer";
 import CheckoutPage from "./components/CheackOut";
+import Messages from "./components/sections/Messages";
+import Notifications from "./components/sections/Notifications";
+import Settings from "./components/sections/Settings";
+import Dashboard from "./components/sections/Dashboard";
 
 const App = () => {
   return (
@@ -37,6 +41,10 @@ const App = () => {
         <Route path="/cart" element={<Checkout />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/message" element={<Messages />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <HomeFooter />
     </BrowserRouter>

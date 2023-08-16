@@ -26,22 +26,22 @@ const isItemInWishList = useSelector((state) =>
 
  const addItemToCart = () => {
    if (isItemInCart) {
-     toast.warning(`${data.title} is already in the cart.`);
+     toast.warning(`${data.title.slice(0, 30) + "..."} is already in the cart.`);
     //  Navigate("/cart");
    } else {
      dispatch(addToCart(data));
-     toast.success(`${data.title} added to cart.`);
+     toast.success(`${data.title.slice(0,30)+"..."} added to cart.`);
     //  Navigate("/cart");
    }
  };
 
  const addItemToWishlist = () => {
    if (isItemInWishList) {
-     toast.warning(`${data.title} already  added to wishlist.`);
+     toast.warning(`${data.title.slice(0,30)+"..."} already  added to wishlist.`);
     //  Navigate("/wishlist");
    } else {
      dispatch(addToWishlist(data));
-     toast.success(`${data.title} added to wishlist.`);
+     toast.success(`${data.title.slice(0,30)+"..."} added to wishlist.`);
     //  Navigate("/wishlist");
    }
   };
@@ -49,12 +49,12 @@ const isItemInWishList = useSelector((state) =>
   const removeItemFromWishlist = () => {
     
       dispatch(removeFromWishlist(data._id));
-      toast.warning(`${data.title} removed from wishlist.`);
+      toast.warning(`${data.title.slice(0,30)+"..."} removed from wishlist.`);
     
   };
   const removeItemFromCart = () => {
     dispatch(removeFromCart(data._id));
-    toast.warning(`${data.title} removed from cart.`);
+    toast.warning(`${data.title.slice(0,30)+"..."} removed from cart.`);
   };
 const [isMobile, setIsMobile] = useState(false);
 
@@ -76,24 +76,28 @@ useEffect(() => {
 }, [isMobile]);
    return (
      <div className="border-spacing-2.5">
-       <div className={`card-x h-[305px] w-full ${cls && "h-[315px] md:h-[500px] md:w-full"} md:h-[480px] bg-white z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105`}>
-         <div className="m-auto flex items-center  ml-[-8px] h-[180px] w-full md:h-[280px]  md:w-full p-4">
+       <div
+         className={`card-x h-auto w-full ${
+           cls && "h-[315px] md:h-[380px] md:w-full"
+         } md:h-[360px] bg-slate-50 z-30  relative shadow-md rounded-md overflow-hidden transition transform hover:scale-105`}
+       >
+         <div className="m-auto flex items-center  ml-[-8px] h-[180px] w-full md:h-[220px]  md:w-full p-4">
            <img
              className="object-contain h-[100%] w-full"
              src={img[0].url || img}
              alt="Home card"
            />
          </div>
-         <div className="text-[12px] md:text-lg  font-semibold ml-4 mt-1 md:mt-1 cursor-pointer ">
-             Brand: <span className="text-green-400">Asus</span>
+         <div className="text-[8px] md:text-[14px]  font-semibold ml-4  cursor-pointer ">
+           Brand: <span className="text-green-400">Asus</span>
          </div>
-         <div className="text-[10px] md:text-lg xl:text-xl font-semibold ml-4 mt-2 md:mt-4">
+         <div className="text-[8px] md:text-[16px]  font-semibold ml-4">
            <Link to={`/product/${data._id}`}>
-             {isMobile ? title.slice(0, 25) + "..." : title.slice(0, 25) + "..."}
+             {isMobile ? title.slice(0, 75) + "..." : title.slice(0, 45) + "..."}
            </Link>
          </div>
 
-         <div className="text-[8px] md:text-xs xl:text-sm font-light ml-4">
+         {/* <div className="text-[8px] md:text-xs xl:text-sm font-light ml-4">
            <h3>
              <Link to={`/product/${data._id}`}>
                {isMobile
@@ -101,53 +105,74 @@ useEffect(() => {
                  : ReactHtmlParser(description.slice(0, 35) + "...")}
              </Link>
            </h3>
-         </div>
+         </div> */}
 
          {/* <div className="text-[10px] md:text-lg xl:text-xl font-semibold mt-2 ml-4 md:ml-4 md:mt-4">
            <StarIcon className="h-[12px] md:h-[25px] mb-1 md:mb-3 text-[10px] md:text-[16px]" />{" "}
            {ratings}5 Ratings
          </div> */}
-         <div className="text-[10px] md:text-lg xl:text-xl font-light md:ml-1 m-1 md:mt-1 flex justify-start p-1 md:p-2">
-           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
-           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
-           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
-           <StarIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
-           <StarHalfIcon className="text-yellow-300 text-[34px] h-[32px] w-[32px]" />
+         <div className="text-[10px] md:text-[13px]  font-light ml-2 md:ml-1  flex justify-between items-center p-1 md:p-2">
+           <div>
+             <StarIcon
+               style={{ fontSize: isMobile ? "10px" : "18px" }}
+               className="text-yellow-300 text-[50px]  h-[10px] w-[10px] md:h-[14px] md:w-[14px]"
+             />
+             <StarIcon
+               style={{ fontSize: isMobile ? "10px" : "18px" }}
+               className="text-yellow-300  h-[10px] w-[10px] md:h-[14px] md:w-[14px]"
+             />
+             <StarIcon
+               style={{ fontSize: isMobile ? "10px" : "18px" }}
+               className="text-yellow-300  h-[10px] w-[10px] md:h-[14px] md:w-[14px]"
+             />
+             <StarIcon
+               style={{ fontSize: isMobile ? "10px" : "18px" }}
+               className="text-yellow-300  h-[10px] w-[10px] md:h-[14px] md:w-[14px]"
+             />
+             <StarHalfIcon
+               style={{ fontSize: isMobile ? "10px" : "18px" }}
+               className="text-yellow-300  h-[10px] w-[10px] md:h-[14px] md:w-[14px]"
+             />
+             <span>(15)</span>
+           </div>
+           <div>Sold: (36)</div>
          </div>
-         <div className="text-[10px] md:text-lg xl:text-xl font-light md:ml-2 m-1 md:mt-3 flex justify-between p-2 md:p-3">
+         <div className="text-[8px] md:text-[16px]  font-light ml-2 md:ml-2  flex justify-between items-center px-2">
            <span>
-             Price: $<b>{price}</b>
+             price: $
+             <b className="text-purple-500 text-[10px] md:text-[18px] ">{price}</b>
              <sup>
-               <s className="text-red-500">$1066</s>
+               <s className="text-red-500">$166</s>
+               <sup>40%</sup>
              </sup>
            </span>
            <span>
-             InStock: $
+             stock: $
              <b className={`${inStock > 0 ? "text-green-500" : "text-red-500"}`}>
                {inStock ? inStock : 0}
              </b>
            </span>
          </div>
 
-         <div className="card-hover absolute z-50 right-[10px] top-[30%] cursor-pointer">
+         <div className="card-hover absolute z-50 right-[10px] top-[4%] cursor-pointer">
            <div className="flex flex-col font-bold">
              <Link onClick={() => setIsOpen(true)}>
                <Tooltip title="View This Product" placement="top">
-                 <EyeIcon className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[16px]" />
+                 <EyeIcon className="h-[16px] md:h-[28px] mb-1 md:mb-3 text-[16px]" />
                </Tooltip>
              </Link>
-             {isOpen && <ModalProduct isOpen={isOpen} setIsOpen={setIsOpen} img={img} />}
+             {isOpen && <ModalProduct isOpen={isOpen} setIsOpen={setIsOpen} img={img} data={data} addItemToCart={addItemToCart} />}
              {isItemInWishList ? (
                <Tooltip placement="top" title="Item added to your wishlist">
                  <HeartIcon
-                   className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[38px] text-rose-600"
+                   className="h-[16px] md:h-[28px] mb-1 md:mb-3 text-[28px] text-rose-600"
                    onClick={removeItemFromWishlist}
                  />
                </Tooltip>
              ) : (
                <Tooltip placement="top" title="Add item to your wishList.">
                  <HeartIcon
-                   className="h-[16px] md:h-[38px] mb-1 md:mb-3 text-[38px] outline-red-600"
+                   className="h-[16px] md:h-[28px] mb-1 md:mb-3 text-[28px] outline-red-600"
                    onClick={addItemToWishlist}
                  />
                </Tooltip>
@@ -155,14 +180,14 @@ useEffect(() => {
              {isItemInCart ? (
                <Tooltip placement="top" title="Item added to your cart.">
                  <ShoppingCartIcon
-                   className="h-[16px] md:h-[38px] mb-1 md:mb-3  text-rose-600"
+                   className="h-[16px] md:h-[28px] mb-1 md:mb-3  text-rose-600"
                    onClick={removeItemFromCart}
                  />
                </Tooltip>
              ) : (
                <Tooltip placement="top" title="Add item to your cart.">
                  <ShoppingCartIcon
-                   className="h-[16px] md:h-[38px] mb-1 md:mb-3"
+                   className="h-[16px] md:h-[28px] mb-1 md:mb-3"
                    onClick={addItemToCart}
                  />
                </Tooltip>

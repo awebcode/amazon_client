@@ -32,12 +32,19 @@ class ApiFeatures {
   }
   filter() {
     const queryCopy = { ...this.queryStr };
-    //   Removing some fields for category
-    const removeFields = ["keyword","sort", "page", "limit","ratings"];
+    // Removing some fields for category
+    const removeFields = ["keyword", "page", "limit","price", "sort"];
 
     removeFields.forEach((key) => delete queryCopy[key]);
 
-    // Filter For Price and Rating
+    // Filter for Price
+    if (this.queryStr.price && typeof this.queryStr.price === "string") {
+      const priceRange = this.queryStr.price.split("-");
+      if (priceRange.length === 2) {
+        const [minPrice, maxPrice] = priceRange;
+        queryCopy.price = { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) };
+      }
+    }
 
     let queryStr = JSON.stringify(queryCopy);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);

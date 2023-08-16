@@ -48,7 +48,7 @@ const NavBar = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="h-[16px] md:h-[28px] text-white"
+                  className="h-[14px] md:h-[22px] text-white"
                 >
                   <path
                     strokeLinecap="round"
@@ -58,7 +58,7 @@ const NavBar = () => {
                 </svg>
 
                 <div className="relative">
-                  <div className="absolute   right-[-22px] top-[-20px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[2px] p-[1px] rounded">
+                  <div className="absolute   right-[-22px] top-[-20px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-500  md:p-[2px] p-[1px] rounded">
                     20
                   </div>
                 </div>
@@ -72,9 +72,9 @@ const NavBar = () => {
             >
               {/* ... Wishlist icon and count ... */}
               <div className="flex m-2">
-                <HeartIcon className="h-[16px] md:h-[28px]  text-white" />
+                <HeartIcon className="h-[14px] md:h-[22px]  text-white" />
                 <div className="relative">
-                  <div className="absolute   right-[-20px] top-[-24px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
+                  <div className="absolute   right-[-20px] top-[-24px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-500  md:p-[4px] p-[1px] rounded">
                     {wishlist}
                   </div>
                 </div>
@@ -90,7 +90,7 @@ const NavBar = () => {
             >
               {/* ... Cart icon and count ... */}
               <div className="flex m-2">
-                <ShoppingCartIcon className="h-[16px] md:h-[28px] text-white" />
+                <ShoppingCartIcon className="h-[14px] md:h-[22px] text-white" />
                 <div className="relative">
                   <div className="absolute right-[-22px] top-[-22px] font-bold m-2 text-[8px] md:text-[12px]  bg-green-400  md:p-[4px] p-[1px] rounded">
                     {cart}

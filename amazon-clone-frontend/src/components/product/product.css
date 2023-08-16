@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  
 }
 
 .create-product-form {
@@ -91,7 +92,8 @@
   flex-wrap: wrap;
   padding: 0 2vmax 0 12vmax;
   justify-content: center;
-  min-height: 40vh;
+ 
+  min-height: 850px !important;
 }
 .hover-transition {
       @apply transition-all duration-300;
@@ -103,6 +105,7 @@
   display: flex;
   justify-content: center;
   margin: 6vmax;
+  
 }
 
 .pagination {
@@ -152,12 +155,15 @@
 .filterBox {
   width: 10vmax;
   position: absolute;
+ 
   top: 10vmax;
   left: 4vmax;
+   height:fit-content !important;
 }
 
 .categoryBox {
   padding: 0%;
+  height: fit-content !important;
 }
 
 .category-link {
@@ -186,6 +192,7 @@
     padding: 0px;
     flex-direction: row-reverse;
     padding-left: 8vmax;
+    min-height: 500px;
   }
   
   .filterBox {

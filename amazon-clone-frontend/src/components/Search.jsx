@@ -102,15 +102,15 @@ useEffect(() => {
       document.body.removeEventListener("click", handleClickOutside);
     };
   }, []);
-const searchCategory = (category) => {
-  navigate({
-    pathname: "search",
-    search: `${createSearchParams({
-      category: ``,
-      searchTerm: `${searchTerm}`,
-    })}`,
-  });
-};
+ const searchCategory = () => {
+   navigate({
+     pathname: "search",
+     search: `${createSearchParams({
+       category: category,
+       searchTerm: searchTerm,
+     })}`,
+   });
+ };
   return (
     <div className="w-auto md:w-[100%]">
       <div

@@ -26,34 +26,35 @@ export const getAllProduct = async (req, res, next) => {
   try {
     const resultPerpage = 8;
     const productsCount = await Product.countDocuments();
-console.log(req.query)
+
+  
+
     const apiFeatures = new ApiFeatures(
       Product.find(), //{user:req.user._id} for only user her own data
       req.query
     )
-       .search()
-      .filter()
+      .search()
+      .filter() // Pass the filter here
       .sorting()
-
       .pagination(resultPerpage);
+
     const products = await apiFeatures.query;
-    //  console.log(products)
     let filteredProductsCount = products.length;
+      console.log(products)
     res.status(200).json({
       success: true,
-
       msg: "All Products",
       resultPerpage,
       products,
       productsCount,
       filteredProductsCount,
-      
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return next(new ErrorHandler(error.message, 500));
   }
 };
+
 //get all products
 export const getAllProducts = async (req, res) => {
   try {

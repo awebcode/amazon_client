@@ -385,12 +385,13 @@ const CategorySidebar = ({ setOpen, user,open }) => {
   };
 
 
-  const searchCategory = (category) => {
+  const searchCategory = (category, subcategory) => {
     navigate({
       pathname: "search",
       search: `${createSearchParams({
         category: `${category}`,
         searchTerm: ``,
+        subcategory: subcategory || "",
       })}`,
     });
   };

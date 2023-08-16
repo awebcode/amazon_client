@@ -83,7 +83,7 @@ const Cside2 = ({
             className="sub-category-item"
             key={subIndex}
             onClick={() => {
-              searchCategory(subcategory);
+              searchCategory(category,subcategory);
               setOpen(false);
             }}
           >

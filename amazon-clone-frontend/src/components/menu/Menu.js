@@ -6,7 +6,7 @@ import { Avatar, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useMeQuery } from '../../redux/auth';
 import { useEffect, useState } from 'react';
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export default function DropdownProfile() {
     const { data, isLoading } = useMeQuery();
@@ -47,7 +47,7 @@ export default function DropdownProfile() {
           ) : (
             <>
               {" "}
-              <AccountBoxIcon
+              <AccountCircleIcon
                
                 className="h-full w-full object-contain"
                 style={{

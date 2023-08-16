@@ -7,8 +7,10 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import Details from "./Details";
+import ModalDetails from "./ModalDetails";
 
-function ModalProduct({ isOpen, setIsOpen, img }) {
+function ModalProduct({data, isOpen, setIsOpen, img }) {
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -20,7 +22,24 @@ function ModalProduct({ isOpen, setIsOpen, img }) {
       setCurrentImage(img[0]?.url);
     }
   }, [img]);
+const [isMobile, setIsMobile] = useState(false);
 
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  // Initial check on component mount
+  handleResize();
+
+  // Add event listener for window resize
+  window.addEventListener("resize", handleResize);
+
+  // Clean up the event listener on component unmount
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  };
+}, [isMobile]);
   return (
     <Modal
       open={isOpen}
@@ -34,7 +53,7 @@ function ModalProduct({ isOpen, setIsOpen, img }) {
       <div
         style={{
           backgroundColor: "white",
-          width: "45%",
+          width: isMobile ? "90%" : "55%",
           padding: "16px",
           borderRadius: "4px",
           outline: "none",
@@ -54,7 +73,8 @@ function ModalProduct({ isOpen, setIsOpen, img }) {
         >
           <CloseIcon />
         </IconButton>
-        <div className="h-[100px] w-[100px] md:h-[400px] md:w-[400px] block mx-auto">
+        {/* <div className="flex items-center justify-between p-3">
+         <div className="h-[100px] w-[100px] md:h-[400px] md:w-[400px] block mx-auto">
           <img
             src={currentImage}
             alt="Product"
@@ -92,8 +112,10 @@ function ModalProduct({ isOpen, setIsOpen, img }) {
             marginTop: "16px",
           }}
         >
-          {/* Your modal content */}
+         
         </div>
+          </div> */}
+        <ModalDetails data={data} isMobile={isMobile} setIsMobile={setIsMobile} />
       </div>
     </Modal>
   );

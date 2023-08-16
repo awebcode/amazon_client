@@ -91,10 +91,10 @@ const HomePage = () => {
   return (
     <div className="bg-amazonclone-background">
       {/* <CarouselCategory /> */}
-      <div className="min-w-full max-w-lg m-auto p-5 md:p-20 md:pt-0">
+      <div className="min-w-full max-w-lg m-auto p-2 md:p-20 md:pt-0">
         <CarouselCategory2 />
         <div className="relative">
-          <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
+          <h1 className="custom_border text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
             Best Sales Products
           </h1>
           {!data?.products &&
@@ -104,7 +104,7 @@ const HomePage = () => {
               <h2 className="text-center font-bold">No Products Available</h2>
             ))}
         </div>
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-1 md:gap-5">
           {data &&
             data.products.map((data, i) => {
               return (
@@ -132,7 +132,7 @@ const HomePage = () => {
         </div>
         {/* sec2 */}
         <div className="relative">
-          <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
+          <h1 className="custom_border text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
             Popular Products
           </h1>
           {!data2?.products &&
@@ -142,7 +142,7 @@ const HomePage = () => {
               <h2 className="text-center font-bold">No Products Available</h2>
             ))}
         </div>
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-1 md:gap-5">
           {data2 &&
             data2.products.slice(8, 16).map((data, i) => {
               return (
@@ -164,7 +164,7 @@ const HomePage = () => {
         {/* close  Popular products */}
         {/* start Featured products */}
         <div className="relative">
-          <h1 className="text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
+          <h1 className="custom_border text-2xl md:text-5xl p-2 md:p-5 m-2 md:m-8 ml-0 font-bold">
             Featured Products
           </h1>
           {!data2?.products &&
@@ -174,7 +174,7 @@ const HomePage = () => {
               <h2 className="text-center font-bold">No Products Available</h2>
             ))}
         </div>
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-1 md:gap-5">
           {data2 &&
             data2.products.slice(4, 12).map((data, i) => {
               return (
