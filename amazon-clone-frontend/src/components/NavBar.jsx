@@ -18,7 +18,10 @@ const NavBar = () => {
   const [sidebar, setSidebar] = useState(false);
   const { user } = useUserContext();
   const { data, isLoading, isError } = useGetProductCategoriesQuery();
-
+  const [selectedCategory,setSelectedCategory]=useState("")
+  function func(category) {
+    setSelectedCategory(category)
+  }
   return (
     <header className="bg-amazonclone">
       <div className="max-w-[100vw] flex flex-wrap justify-between items-center py-1 md:py-2 px-4 md:px-10 lg:px-16 xl:px-20">
@@ -30,7 +33,7 @@ const NavBar = () => {
         </div>
         {/* Middle */}
         <div className="flex-[50%] md:flex flex-grow items-center ml-4">
-          <Search />
+          <Search func={func} />
         </div>
         {/* Right */}
 
@@ -117,7 +120,7 @@ const NavBar = () => {
           <span onClick={() => setSidebar(!sidebar)} isOpen={sidebar} className="ml-2">
             All
           </span>
-          {sidebar && <CategorySidebar setOpen={setSidebar} user={user} open={sidebar} />}
+          {sidebar&& <CategorySidebar setOpen={setSidebar} user={user} open={sidebar} filteredCategory={selectedCategory} />}
         </div>
         <div className="text-[8px] md:text-[16px] ">Today's Deals</div>
         <div className="text-[8px] md:text-[16px] ">

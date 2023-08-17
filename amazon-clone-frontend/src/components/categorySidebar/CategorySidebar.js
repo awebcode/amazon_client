@@ -365,12 +365,16 @@ const categories = [
   },
 ];
 
-const CategorySidebar = ({ setOpen, user,open }) => {
+const CategorySidebar = ({ setOpen, user, open, filteredCategory }) => {
   const navigate = useNavigate();
   const [openSubcategories, setOpenSubcategories] = useState([]);
+  const [openSubcategories2, setOpenSubcategories2] = useState(false);
   const { data, isLoading, isError } = useGetProductCategoriesQuery();
-
-  const [openSubCategorySidebar,setOpenSubCategorySidebar]=useState(false)
+//  console.log(data)
+    const subcategory = data.categories.find((d) => d.title === filteredCategory)
+    
+  //console.log("filterdsubcategorsi", subcategory.subcategories);
+  const [openSubCategorySidebar, setOpenSubCategorySidebar] = useState(false);
 
   const toggleSubcategories = (categoryName) => {
     setOpenSubcategories((prevOpenSubcategories) => {
@@ -383,7 +387,6 @@ const CategorySidebar = ({ setOpen, user,open }) => {
       }
     });
   };
-
 
   const searchCategory = (category, subcategory) => {
     navigate({
@@ -447,7 +450,20 @@ const CategorySidebar = ({ setOpen, user,open }) => {
                 )}
               </span>
             </div>
-            {openSubcategories && openSubcategories.includes(category.name) &&
+            {open && subcategory && (
+              <Cside2
+                category={subcategory.title}
+                key={index}
+                open={openSubCategorySidebar}
+                toggle={setOpenSubcategories}
+                setOpen={setOpen}
+                searchCategory={searchCategory}
+                sidebarRef={sidebarRef}
+                subcategories={subcategory.subcategories}
+              />
+            )}
+            {openSubcategories &&
+              openSubcategories.includes(category.name) &&
               category.subcategories.length > 0 && (
                 <ul className="sub-category-list">
                   <Cside2
@@ -464,8 +480,8 @@ const CategorySidebar = ({ setOpen, user,open }) => {
               )}
           </li>
         ))}
-      </ul>
-      <CloseIcon onClick={() => setOpen(false)} className="closeIcon" />
+      </ul>c
+      <CloseIcon onClick={() => setOpen(false)} className="closeIcon"  style={{cursor:"pointer"}}/>
     </div>
   );
 };

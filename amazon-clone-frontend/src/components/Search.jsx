@@ -4,11 +4,12 @@ import { Link, createSearchParams, useNavigate } from "react-router-dom";
 import { useGetProductCategoriesQuery } from "../redux/categoryApi";
 import { useGetAllProductQuery } from "../redux/productApi";
 
-const Search = () => {
+const Search = ({func}) => {
   const [suggestions, setSuggestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("All");
   const [numToShow, setNumToShow] = useState(10000);
+  
   const {
     data: productData,
     isLoading: productLoading,
@@ -110,26 +111,35 @@ useEffect(() => {
        searchTerm: searchTerm,
      })}`,
    });
- };
+  };
+  //
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    
+    setCategory(selectedCategory)
+    // Call the func function with the selected category
+    func(selectedCategory);
+  };
+
   return (
     <div className="w-auto md:w-[100%]">
       <div
-        className="flex items-center h-5 md:h-10  bg-amazonclone-yellow rounded"
+        className="flex items-center h-5 md:h-10  bg-amazonclone-yellow rounded relative"
         ref={suggestionContainerRef}
       >
         <select
-          
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-          className="w-[18%] md:w-[9%]  bg-gray-300 text-black border  text-[10px] md:text-[12px] h-[100%] select-text"
+          onChange={handleCategoryChange}
+          className="absolute  md:w-fit  bg-gray-300 text-black border  text-[6px] md:text-[13px] h-[100%] select-text"
         >
-          <option value="All">All</option>
+          <option value="All">
+            All
+          </option>
           {categories.map((v, u) => (
             <option
               className="border-none p-2 text-[10px] md:text-[16px]"
               value={v.title}
               key={u}
+              
             >
               {v.title}
             </option>
