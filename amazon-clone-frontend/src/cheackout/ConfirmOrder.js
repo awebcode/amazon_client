@@ -108,7 +108,7 @@ const ConfirmOrder = () => {
               <span>₹{totalPrice}</span>
             </div>
 
-            <button onClick={proceedToPayment}>Proceed To Payment</button>
+            <button onClick={proceedToPayment} className="btn">Proceed To Payment</button>
           </div>
         </div>
       </div>
