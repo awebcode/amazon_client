@@ -5,7 +5,7 @@ const sendToken = (user, statusCode, res) => {
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: "strict",
     expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // Set SameSite attribute for cross-site cookies
   };
 
