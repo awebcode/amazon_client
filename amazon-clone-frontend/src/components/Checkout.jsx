@@ -16,6 +16,9 @@ const Checkout = () => {
     )
   );
   const dispatch = useDispatch();
+  if (!products || products?.length <= 0) {
+    return <h1 className="text-center text-3xl md:text-7xl p-10 md:p-20 font-thin">No Items To Cart.</h1>;
+  }
 
   return (
     <div className="bg-amazonclone-background min-h-screen p-4 sm:p-6 md:p-8">
@@ -24,6 +27,7 @@ const Checkout = () => {
           {/* Products */}
           <div className="bg-white rounded-lg p-4">
             <h2 className="text-xl font-semibold mb-4">Shopping Cart</h2>
+            
             {products.map((product) => (
               <div key={product._id} className="mb-6">
                 <div className="grid grid-cols-12 gap-4">

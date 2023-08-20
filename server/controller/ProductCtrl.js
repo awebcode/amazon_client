@@ -40,7 +40,7 @@ export const getAllProduct = async (req, res, next) => {
 
     const products = await apiFeatures.query;
     let filteredProductsCount = products.length;
-      console.log(products)
+      // console.log(products)
     res.status(200).json({
       success: true,
       msg: "All Products",

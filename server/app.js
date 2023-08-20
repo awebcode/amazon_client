@@ -15,6 +15,8 @@ import messageRouter from "./router/message/message.route.js";
 import tagRouter from "./router/tagRouter.js";
 import { error } from "./utils/error.js";
 import prodcategoryRouter from "./router/prodcategoryRoute.js";
+import orderRouter from "./router/orderRoute.js";
+import paymentRouter from "./router/paymentRoute.js";
 import path from "path";
 const __dirname = path.resolve();
 const app = express();
@@ -33,7 +35,7 @@ app.use(fileupload());
 
 app.use(
   cors({
-    origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
+    origin: "http://localhost:3000", //http://localhost:3000
 
     credentials: true,
     //https://amazonecommerceapp.vercel.app
@@ -50,6 +52,8 @@ app.use("/api/v1", postReactRouter);
 app.use("/api/v1", commentReactRouter);
 app.use("/api/v1", conversationsRouter);
 app.use("/api/v1", messageRouter);
+app.use("/api/v1", orderRouter);
+app.use("/api/v1", paymentRouter);
 // //hosting
 // app.use(express.static(path.join(__dirname, "./amazon-clone-frontend/build")));
 

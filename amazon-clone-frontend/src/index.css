@@ -56,3 +56,9 @@ body {
   width: 10px !important;
 }
 }
+.greenColor{
+  color: green !important;
+}
+.redColor{
+  color: #e11d48 !important;
+}

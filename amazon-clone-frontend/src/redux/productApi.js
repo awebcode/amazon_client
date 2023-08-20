@@ -69,7 +69,7 @@ export const Product = createApi({
         keyword = "",
         currentPage = 1,
         category,
-        price = [0,0],
+        price = [0, 0],
         rating = 0,
         sort,
       }) => {
@@ -86,7 +86,15 @@ export const Product = createApi({
       },
       providesTags: ["Product"],
     }),
+    getStripeApiKey: builder.query({
+      query: (id) => ({
+        url: `/stripeapikey`, // Replace with your actual login endpoint
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Product"],
+    }),
   }),
 });
 
-export const { useGetAllProductQuery,useCreateProductMutation,useGetProductQuery,useGetProductDetailsQuery,useUpdateProductMutation,useGetProductByFilterQuery } = Product; // Export hooks for mutations
+export const { useGetAllProductQuery,useCreateProductMutation,useGetProductQuery,useGetProductDetailsQuery,useUpdateProductMutation,useGetProductByFilterQuery,useGetStripeApiKeyQuery } = Product; // Export hooks for mutations

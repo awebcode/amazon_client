@@ -6,6 +6,7 @@ import { api, auth } from "./auth";
 import { Product, productApi } from "./productApi";
 import { createProductReducer, getproductsReducer } from "./reducer";
 import { Categories } from "./categoryApi";
+import { myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from "../reducers/orderReducer";
 const initialState = {
   cart: {
     products: [],
@@ -15,6 +16,9 @@ const initialState = {
     products: [],
     productsNumber: 0,
   },
+  order: {
+    shippingInfo:[]
+  }
 };
 
 // Cart Slice and Reducer
@@ -66,6 +70,10 @@ export const cartSlice = createSlice({
       const savedCart = JSON.parse(localStorage.getItem("cart"));
       if (savedCart) {
         state.cart = savedCart;
+      }
+      const savedOrder = JSON.parse(localStorage.getItem("shippingInfo"));
+      if (savedOrder) {
+        state.order.shippingInfo = savedOrder;
       }
     },
   },
@@ -128,10 +136,17 @@ const store = configureStore({
     [Product.reducerPath]: Product.reducer,
     [Categories.reducerPath]: Categories.reducer,
     createProduct: createProductReducer,
-    products: getproductsReducer, // Include the auth reducer
+    products: getproductsReducer,
+    newOrder: newOrderReducer,
+    myOrders: myOrdersReducer,
+    orderDetails: orderDetailsReducer, // Include the auth reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(auth.middleware, Product.middleware,Categories.middleware), // Include the auth middleware
+    getDefaultMiddleware().concat(
+      auth.middleware,
+      Product.middleware,
+      Categories.middleware
+    ), // Include the auth middleware
 });
 store.dispatch(loadCartFromLocalStorage()); // Load cart data
 store.dispatch(loadWishlistFromLocalStorage()); // Load wishlist data
@@ -139,6 +154,10 @@ store.dispatch(loadWishlistFromLocalStorage()); // Load wishlist data
 store.subscribe(() => {
   localStorage.setItem("cart", JSON.stringify(store.getState().cart.cart));
   localStorage.setItem("wishlist", JSON.stringify(store.getState().wishlist.wishlist));
+   if (JSON.stringify(store.getState())?.newOrder?.order?.success) {
+     localStorage.removeItem("cart");
+     localStorage.removeItem("wishlist");
+   }
 });
 
 export default store;
