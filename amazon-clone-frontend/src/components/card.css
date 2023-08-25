@@ -1,8 +1,0 @@
-.card-hover{
-    /* display: none; */
-    transition: all 0.4s ease-out !important;
-    background-color: rgba(240, 248, 255, 0.26);
-}
-.card-x:hover .card-hover{
-    display:block;
-}

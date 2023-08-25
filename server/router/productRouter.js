@@ -1,6 +1,6 @@
 import { isAuthenticatedUser } from "../utils/auth.js";
 import express from "express";
-import { createProduct, deleteProduct, getAllProduct, getAllProducts, getAllUserProduct, getProductDetails, updateProduct } from "../controller/ProductCtrl.js";
+import { createProduct, createProductReview, deleteProduct, deleteReview, getAllProduct, getAllProducts, getAllUserProduct, getProductDetails, getProductReviews, updateProduct } from "../controller/ProductCtrl.js";
 const router = express.Router()
 import multer from "multer";
 const storage = multer.memoryStorage();
@@ -16,4 +16,7 @@ router.get("/get/user/products",isAuthenticatedUser, getAllUserProduct); //auth 
 router.delete("/delete/:id", deleteProduct);
 router.put("/update/:id", updateProduct);
 router.get("/get-details/:id", getProductDetails);
+router.put("/review",isAuthenticatedUser, createProductReview);
+router.get("/review/:id", getProductReviews);
+router.delete("/review-delete/:productId/:reviewId", deleteReview);
 export default router;

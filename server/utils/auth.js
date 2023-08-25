@@ -16,6 +16,8 @@ export const isAuthenticatedUser = async (req, res, next) => {
   req.user = await User.findById(decodedData.id);
 
   req.userId = decodedData.id;
+  req.user._id = decodedData.id;
+  req.user.id = decodedData.id;
 
   // req.avatar = req.user.avatar.url
   

@@ -162,3 +162,116 @@ export const getProductDetails = async (req, res, next) => {
   return next(new ErrorHandler(error.message, 500));
  }
 };
+//review
+// Create New Review or Update the review
+export const createProductReview = async (req, res, next) => {
+  const { rating, comment, productId } = req.body;
+console.log(req.body)
+  const review = {
+    user: req.user._id,
+    name: req.user.name,
+    rating: Number(rating),
+    comment,
+  };
+
+  const product = await Product.findById(productId);
+
+  const isReviewed = product.reviews.find(
+    (rev) => rev.user.toString() === req.user._id.toString()
+  );
+
+  if (isReviewed) {
+    product.reviews.forEach((rev) => {
+      if (rev.user.toString() === req.user._id.toString())
+        (rev.rating = rating), (rev.comment = comment);
+    });
+  } else {
+    product.reviews.push(review);
+    product.numOfReviews = product.reviews.length;
+    product.ratings = product.reviews.length;
+  }
+
+  let avg = 0;
+
+  product.reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+
+  product.ratings = avg / product.reviews.length;
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,message:"Review saved successfully"
+  });
+}
+
+// Get All Reviews of a product
+export const getProductReviews = async (req, res, next) => {
+  try {
+  
+   const product = await Product.findById(req.params.id).populate("reviews.user");
+
+   if (!product) {
+     return res.status(404).json({ message: "Product not found" });
+   }
+
+   res.status(200).json({
+     success: true,
+     reviews: product.reviews,
+   });
+ } catch (error) {
+  console.log(error)
+ }
+}
+export const deleteReview = async (req, res, next) => {
+  try {
+    const productId = req.params.productId;
+    const reviewId = req.params.reviewId;
+
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    const updatedReviews = product.reviews.filter(
+      (review) => review._id.toString() !== reviewId.toString()
+    );
+
+    let newRatings = 0;
+    let numOfReviews = 0;
+
+    if (updatedReviews.length > 0) {
+      const totalRatings = updatedReviews.reduce((sum, review) => sum + review.rating, 0);
+      newRatings = totalRatings / updatedReviews.length;
+      numOfReviews = updatedReviews.length;
+    }
+
+    await Product.updateOne(
+      { _id: productId },
+      {
+        $set: {
+          ratings: newRatings,
+          numOfRatings: numOfReviews,
+          reviews: updatedReviews,
+        },
+      }
+    );
+
+    return res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+
+    if (error.errors) {
+      const validationErrors = Object.keys(error.errors).map(
+        (field) => error.errors[field].message
+      );
+      return res.status(400).json({ success: false, errors: validationErrors });
+    }
+
+    return res
+      .status(500)
+      .json({ success: false, message: "An error occurred while deleting the review" });
+  }
+};

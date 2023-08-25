@@ -19,11 +19,33 @@ const productSchema = new mongoose.Schema(
     },
 
     numOfRatings: {
-      type: String,
+      type: Number,
       default: 0,
     },
+    reviews: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "user",
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        rating: {
+          type: Number,
+          required: true,
+        },
+        comment: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+
     ratings: {
-      type: String,
+      type: Number,
       default: 0,
     },
     user: {
@@ -35,7 +57,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-   
+
     images: {
       type: Array,
       required: true,

@@ -1,0 +1,79 @@
+{
+  "0":{
+    "id": 1,
+    "title": "Product 1",
+    "description": "Description of Product 1",
+    "ratings": 4.5,
+    "image": "/carousel/1.jpg",
+    "price": 100,
+    "lessPrice": 90,
+    "sold": 50,
+    "quantity": 2
+  },
+  "1":{
+    "id": 22525,
+    "title": "Product 2",
+    "description": "Description of Product 2",
+    "ratings": 4.2,
+    "image": "/carousel/2.jpg",
+    "price": 120,
+    "lessPrice": 110,
+    "sold": 50,
+    "quantity": 2
+  },
+  "2":{
+    "id": 32525,
+    "title": "Product 3",
+    "description": "Description of Product 3",
+    "ratings": 4.8,
+    "image": "/carousel/3.jpg",
+    "price": 150,
+    "lessPrice": 140,
+    "sold": 50,
+    "quantity": 2
+  },
+ "3": {
+    "id": 42552,
+    "title": "Product 6",
+    "description": "Description of Product 6",
+    "ratings": 1.5,
+    "image": "/carousel/6.jpg",
+    "price": 300,
+    "lessPrice": 90,
+    "sold": 50,
+    "quantity": 2
+  },
+ "4": {
+    "id": 525522,
+    "title": "Product 4",
+    "description": "Description of Product 4",
+    "ratings": 4.4,
+    "image": "/carousel/4.jpg",
+    "price": 120,
+    "lessPrice": 110,
+    "sold": 50,
+    "quantity": 2
+  },
+  "5":{
+    "id": 625252,
+    "title": "Product 6",
+    "description": "Description of Product 6",
+    "ratings": 4.8,
+    "image": "/carousel/6.jpg",
+    "price": 150,
+    "lessPrice": 140,
+    "sold": 50,
+    "quantity": 2
+  },
+  "6":{
+    "id": 7225,
+    "title": "Product 7",
+    "description": "Description of Product 7",
+    "ratings": 4.8,
+    "image": "/carousel/7.jpg",
+    "price": 150,
+    "lessPrice": 140,
+    "sold": 50,
+    "quantity": 2
+  }
+}

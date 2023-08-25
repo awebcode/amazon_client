@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply bg-yellow-400 w-full p-3 text-xs xl:text-sm rounded hover:bg-yellow-500 mt-3;
+  }
+}
+body {
+  overflow-x: hidden !important;
+  margin: 0px;padding: 0px;border: 0px;outline: 0px;box-sizing: border-box;
+}
+.custom_border{
+  position: relative;
+}
+.custom_border::after {
+  position: absolute;
+  left: 22px;
+  bottom: 5px;
+  content: "";
+  width: 5%;
+  height: 3px;
+  background-color: #e11d48;
+}
+@media(max-width:768px){
+  .custom_border::after {
+  position: absolute;
+  left: 10px;
+  bottom: 5px;
+  content: "";
+  width: 5%;
+  height: 2px;
+  background-color: #e11d48;
+}
+}
+.swiper-button-next{
+  color:black;
+ 
+}
+.swiper-button-prev{
+  color:black;
+  
+  
+  
+}
+@media(max-width:768px){
+  .swiper-button-next{
+  font-size: 10px !important;
+  height: 10px !important;
+  width: 10px !important;
+}
+.swiper-button-prev{
+   font-size: 10px !important;
+  height: 10px !important;
+  width: 10px !important;
+}
+}
+.greenColor{
+  color: green !important;
+}
+.redColor{
+  color: #e11d48 !important;
+}
