@@ -154,10 +154,14 @@ store.dispatch(loadWishlistFromLocalStorage()); // Load wishlist data
 store.subscribe(() => {
   localStorage.setItem("cart", JSON.stringify(store.getState().cart.cart));
   localStorage.setItem("wishlist", JSON.stringify(store.getState().wishlist.wishlist));
-   if (JSON.stringify(store.getState())?.newOrder?.order?.success) {
-     localStorage.removeItem("cart");
-     localStorage.removeItem("wishlist");
-   }
+   
+});
+store.subscribe(() => {
+  const { newOrder } = store.getState();
+  if (newOrder.order.success) {
+    localStorage.removeItem("cart");
+    // localStorage.removeItem("wishlist");
+  }
 });
 
 export default store;

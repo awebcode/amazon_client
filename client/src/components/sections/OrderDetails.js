@@ -31,7 +31,7 @@ const OrderDetails = () => {
          
           <div className="orderDetailsPage">
             <div className="orderDetailsContainer">
-              <Typography component="h1">Order #{order && order._id}</Typography>
+              <h1 className="text-blue-500">Order #{order && order._id}</h1>
               <Typography>Shipping Info</Typography>
               <div className="orderDetailsContainerBox">
                 <div>
@@ -94,7 +94,7 @@ const OrderDetails = () => {
                 {order.orderItems &&
                   order.orderItems.map((item) => (
                     <div key={item.product}>
-                      <img src={item.image} alt="Product" />
+                      <img src={item?.images[0]?.url} alt="Product" />
                       <Link to={`/product/${item.product}`}>{item.name}</Link>{" "}
                       <span>
                         {item.quantity} X ₹{item.price} ={" "}

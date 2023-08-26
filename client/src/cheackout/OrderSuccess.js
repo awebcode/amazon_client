@@ -10,7 +10,9 @@ const OrderSuccess = () => {
   useEffect(() => {
     // Set a timeout to navigate after 5 seconds
     const timeout = setTimeout(() => {
-      navigate("/products"); // Replace with the desired route
+      window.localStorage.removeItem("cart");
+      localStorage.removeItem("cart");
+      navigate("/profile/orders"); // Replace with the desired route
     }, 5000); // 5000 milliseconds = 5 seconds
 
     // Clean up the timeout when the component unmounts
@@ -21,7 +23,7 @@ const OrderSuccess = () => {
       <CheckCircleIcon />
 
       <Typography>Your Order has been Placed successfully </Typography>
-      <Link to="/orders">View Orders</Link>
+      <Link to="/profile/orders">View Orders</Link>
     </div>
   );
 };

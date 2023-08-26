@@ -12,7 +12,7 @@ import {
   useElements,
   Elements,
 } from "@stripe/react-stripe-js";
-
+import {Button}from "antd"
 import axios from "axios";
 import "./payment.css";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
@@ -45,14 +45,22 @@ const Payment = () => {
       }
     }, [cartItems, navigate]);
     const [stripeApiKey, setStripeApiKey] = useState("");
+  const [processingPayment, setProcessingPayment] = useState(false);
+  const [stripePaymentLoading, setstripePaymentLoading] = useState(false);
+  async function getStripeApiKey() {
+      setstripePaymentLoading(true);
+     try {
+       const { data } = await axios.get(
+         `${process.env.REACT_APP_SERVER_URL}/api/v1/stripeapikey`,
+         { withCredentials: true }
+       );
 
-    async function getStripeApiKey() {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/api/v1/stripeapikey`,
-        { withCredentials: true }
-      );
-
-      setStripeApiKey(data.stripeApiKey);
+       setStripeApiKey(data.stripeApiKey);
+     } catch (error) {
+      toast.error(error?.response?.data)
+     } finally {
+       setstripePaymentLoading(false)
+     }
     }
 
     useEffect(() => {
@@ -63,8 +71,9 @@ const Payment = () => {
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   };
- if (isLoading) return <h1 className="text-center text-5xl">Loading....</h1>;
- if (isFetching) return <h1 className="text-center text-5xl">Fetching....</h1>;
+ if (isLoading) return <h1 className="text-center text-2xl font-thin md:text-5xl">Loading....</h1>;
+  if (isFetching) return <h1 className="text-center text-2xl font-thin md:text-5xl">Fetching....</h1>;
+  // if (stripePaymentLoading) return <h1 className="text-center text-2xl font-thin md:text-5xl">Getting Stripe Key....</h1>;
   const order = {
     shippingInfo,
     orderItems: cartItems && cartItems.products,
@@ -74,10 +83,10 @@ const Payment = () => {
     totalPrice: orderInfo.totalPrice,
   };
  
-
+  
   const submitHandler = async (e) => {
     e.preventDefault();
-
+   setProcessingPayment(true)
     payBtn.current.disabled = true;
 
     try {
@@ -118,14 +127,19 @@ const Payment = () => {
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
+           
+           dispatch(createOrder(order));
 
-        const data=  dispatch(createOrder(order));
-
-            console.log(data)
-             
-           localStorage.removeItem("cart");
-           navigate("/success");
             
+            
+          
+            
+               localStorage.removeItem("cart");
+               navigate("/success");
+            
+            
+            
+            ;
         } else {
           toast.error("There's some issue while processing payment ");
         }
@@ -134,6 +148,8 @@ const Payment = () => {
     } catch (error) {
       payBtn.current.disabled = false;
       toast.error(error.response.data.message);
+    } finally {
+      setProcessingPayment(false);
     }
   };
 
@@ -141,8 +157,8 @@ const Payment = () => {
 
   return (
     <Fragment>
-          {/* <MetaData title="Payment" /> */}
-         
+      {/* <MetaData title="Payment" /> */}
+
       <CheckoutSteps activeStep={2} />
       <div className="paymentContainer">
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
@@ -160,12 +176,19 @@ const Payment = () => {
             <CardCvcElement className="paymentInput" />
           </div>
 
-          <input
-            type="submit"
-            value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
+          <Button
             ref={payBtn}
-            className="paymentFormBtn"
-          />
+            type="primary"
+            htmlType="submit"
+            
+            loading={processingPayment}
+            disabled={processingPayment}
+            className="bg-blue-600 w-full"
+          >
+            {processingPayment
+              ? "Submitting..."
+              : `Pay - ₹${orderInfo && orderInfo.totalPrice}`}
+          </Button>
         </form>
       </div>
     </Fragment>

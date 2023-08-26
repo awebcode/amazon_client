@@ -47,7 +47,7 @@ export const newOrder = catchAsyncErrors(async (req, res, next) => {
       shippingPrice,
       totalPrice,
     } = req.body;
-
+console.log(req.body)
     // Create an array to hold order items
     const orderItems = [];
 

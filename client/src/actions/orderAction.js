@@ -35,9 +35,9 @@ export const createOrder = (order) => async (dispatch) => {
       withCredentials: true,
     };
     const { data } = await axios.post(`${baseUrl}/api/v1/order/new`, order, config);
-
+    localStorage.removeItem("cart");
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
-    window.localStorage.removeItem("cart");
+    localStorage.removeItem("cart");
     return data;
   } catch (error) {
     dispatch({

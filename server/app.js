@@ -35,7 +35,7 @@ app.use(fileupload());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://amazonecommerceapp.vercel.app"], //http://localhost:3000
+    origin: "https://amazonecommerceapp.vercel.app", //http://localhost:3000
 
     credentials: true,
     //https://amazonecommerceapp.vercel.app
