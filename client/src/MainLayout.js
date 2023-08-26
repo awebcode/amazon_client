@@ -6,14 +6,14 @@ import {
   AiOutlineUser,
   AiOutlineBgColors,
 } from "react-icons/ai";
-import { RiCouponLine } from "react-icons/ri";
+import { RiCodeView, RiCouponLine } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { ImBlog } from "react-icons/im";
 import { IoIosNotifications } from "react-icons/io";
-import { FaClipboardList, FaBloggerB } from "react-icons/fa";
+import { FaClipboardList, FaBloggerB, FaStarHalf, FaStar } from "react-icons/fa";
 import { SiBrandfolder } from "react-icons/si";
 import { BiCategoryAlt, BiLogOut } from "react-icons/bi";
 import { Layout, Menu, theme } from "antd";
@@ -49,7 +49,7 @@ const MainLayout = () => {
 
   return (
     <Layout className="h-[100vh] w-full">
-      <Sider trigger={null} collapsible collapsed={collapsed} >
+      <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
           <h2 className="text-white fs-5 text-center py-3 mb-0 ">
             <span className="sm-logo">
@@ -78,6 +78,9 @@ const MainLayout = () => {
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
             if (key == "signout") {
+            } else if (key.startsWith("http")) {
+              // Navigate to an external URL
+              window.location.href = key;
             } else {
               navigate(key);
             }
@@ -86,58 +89,33 @@ const MainLayout = () => {
             {
               key: "",
               icon: <AiOutlineDashboard className="fs-4" />,
-              label: "Dashboard",
+              label: "Profile",
             },
             {
-              key: "customers",
-              icon: <AiOutlineUser className="fs-4" />,
-              label: "Customers",
+              key: "reviews",
+              icon: <FaStar className="fs-4" />,
+              label: "Reviews",
             },
+            // {
+            //   key: "customers",
+            //   icon: <AiOutlineUser className="fs-4" />,
+            //   label: "Customers",
+            // },
             {
               key: "Catalog",
               icon: <AiOutlineShoppingCart className="fs-4" />,
               label: "Catalog",
               children: [
                 {
-                  key: "product",
+                  key: "https://adminamazon.vercel.app",
                   icon: <AiOutlineShoppingCart className="fs-4" />,
                   label: "Add Product",
                 },
                 {
-                  key: "list-product",
+                  key: "https://adminamazon.vercel.app",
                   icon: <AiOutlineShoppingCart className="fs-4" />,
                   label: "Product List",
                 },
-                {
-                  key: "brand",
-                  icon: <SiBrandfolder className="fs-4" />,
-                  label: "Brand",
-                },
-                // {
-                //   key: "list-brand",
-                //   icon: <SiBrandfolder className="fs-4" />,
-                //   label: "Brand List ",
-                // },
-                {
-                  key: "category",
-                  icon: <BiCategoryAlt className="fs-4" />,
-                  label: "Category",
-                },
-                // {
-                //   key: "list-category",
-                //   icon: <BiCategoryAlt className="fs-4" />,
-                //   label: "Category List",
-                // },
-                {
-                  key: "color",
-                  icon: <AiOutlineBgColors className="fs-4" />,
-                  label: "Color",
-                },
-                // {
-                //   key: "list-color",
-                //   icon: <AiOutlineBgColors className="fs-4" />,
-                //   label: "Color List",
-                // },
               ],
             },
             {
@@ -151,7 +129,7 @@ const MainLayout = () => {
               label: "Marketing",
               children: [
                 {
-                  key: "coupon",
+                  key: "https://adminamazon.vercel.app",
                   icon: <ImBlog className="fs-4" />,
                   label: "Add Coupon",
                 },
@@ -168,7 +146,7 @@ const MainLayout = () => {
               label: "Blogs",
               children: [
                 {
-                  key: "blog",
+                  key: "https://adminamazon.vercel.app",
                   icon: <ImBlog className="fs-4" />,
                   label: "Add Blog",
                 },
@@ -178,7 +156,7 @@ const MainLayout = () => {
                 //   label: "Blog List",
                 // },
                 {
-                  key: "blog-category",
+                  key: "https://adminamazon.vercel.app",
                   icon: <ImBlog className="fs-4" />,
                   label: "Add Blog Category",
                 },
@@ -189,11 +167,7 @@ const MainLayout = () => {
                 // },
               ],
             },
-            {
-              key: "enquiries",
-              icon: <FaClipboardList className="fs-4" />,
-              label: "Enquiries",
-            },
+
             {
               key: "#",
               icon: <BiLogOut className="fs-4" />,

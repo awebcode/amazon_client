@@ -385,14 +385,35 @@ console.log("categories",data)
   const subcategoryType = data.categories.find((d) => d.type === filteredType);
   
   const getCategoryData = () => {
-    if (filteredSort || filteredType ) {
+    if (filteredSort && filteredType && filteredCategory) {
       return data2.products.filter(
         (d) =>
-          
-          d.sort === filteredSort ||
-          d.type === filteredType
+          d.sort === filteredSort &&
+          d.type === filteredType &&
+          d.category === filteredCategory
       );
+    } else if (filteredSort && filteredCategory) {
+      return data2.products.filter(
+        (d) => d.sort === filteredSort && d.category === filteredCategory
+      );
+    } else if (filteredType && filteredCategory) {
+      return data2.products.filter(
+        (d) => d.type === filteredType && d.category === filteredCategory
+      );
+    } else if (filteredType && filteredSort) {
+      return data2.products.filter(
+        (d) => d.type === filteredType && d.sort === filteredSort
+      );
+    } else if (filteredType) {
+      return data2.products.filter((d) => d.type === filteredType);
+    } else if (filteredSort) {
+      return data2.products.filter((d) => d.sort === filteredSort);
+    } else if (filteredCategory) {
+      return data2.products.filter((d) => d.category === filteredCategory);
+    } else {
+      return null;
     }
+    
   };
 
   const subcategoryXX = getCategoryData();
@@ -505,7 +526,7 @@ console.log("categories",data)
             {subcategoryXX && open && (
               <>
                 <CsideProduct
-                  category={category.title}
+                  category={filteredCategory &&filteredCategory||filteredSort ||filteredType}
                   // key={i}
                   open={openSubCategorySidebar}
                   toggle={setOpenSubcategories}

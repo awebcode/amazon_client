@@ -33,7 +33,7 @@ const CsideProduct = ({
   }, [setOpen]);
 const groupedSubcategories = {};
 
-
+const uniqueSubcategories = [...new Set(subcategories.map(vx => vx.category))];
   return (
     <div
       className={`sub-category-sidebar ${open ? "open" : "close"}`}
@@ -44,22 +44,24 @@ const groupedSubcategories = {};
         {category}
       </div>
       <ul className="sub-category-list">
-        
-        {subcategories.map((vx, i) => {
+        {uniqueSubcategories.length > 0 ? (
+          uniqueSubcategories.map((vx, i) => {
             return (
               <li
                 className="sub-category-item"
-                // key={subIndex}
+                key={i}
                 onClick={() => {
-                  searchCategory(vx.category);
+                  searchCategory(vx);
                   setOpen(false);
                 }}
               >
-                {vx.category}
+                {vx}
               </li>
             );
-          })}
-      
+          })
+        ) : (
+          <h2 onClick={()=> setOpen(false)}>No Item Found</h2>
+        )}
       </ul>
       <CloseIcon
         onClick={() => {

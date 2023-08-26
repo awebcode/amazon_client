@@ -4,7 +4,7 @@ import { useMeQuery } from "../../redux/auth";
 import { Avatar } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 const ReviewCard = ({ review,getReview }) => {
     const { data: userData } = useMeQuery();
@@ -41,7 +41,7 @@ const ReviewCard = ({ review,getReview }) => {
   return (
     <div className="reviewCard">
       <Avatar src={review?.user?.avatar?.url} alt="User" />
-      <p>{review.name}</p>
+      <Link to={`/profile/user/${review?.user?._id}`}>{review.name}</Link>
       <Rating {...options} />
       <span className="reviewCardComment">{review.comment}</span>
       {canDeleteReview && <span onClick={deleteReview} className="text-red-500 cursor-pointer"><DeleteIcon/></span>}

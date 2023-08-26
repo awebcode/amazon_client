@@ -109,12 +109,17 @@ export const getSingleOrder = catchAsyncErrors(async (req, res, next) => {
 
 // get logged in user  Orders
 export const myOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await orderModel.find({ user: req.user._id }).populate("user");
+  try {
+    const orders = await orderModel.find({ user: req.user._id }).populate("user");
 
-  res.status(200).json({
-    success: true,
-    orders,
-  });
+    res.status(200).json({
+      success: true,
+      orders,
+    });
+    console.log("myorders")
+  } catch (error) {
+    console.log("orders",error)
+  }
 });
 
 // get all Orders -- Admin

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Avatar, Card, Spin, Button, Divider, Upload } from "antd";
+import { Avatar, Button, Divider, Tabs } from "antd";
 import {
   UserOutlined,
   LikeOutlined,
@@ -8,6 +8,10 @@ import {
   MessageOutlined,
 } from "@ant-design/icons";
 import axios from "axios";
+
+// Import your CSS file for custom styling
+
+const { TabPane } = Tabs;
 
 const OtherProfile = () => {
   const { id } = useParams();
@@ -37,71 +41,73 @@ const OtherProfile = () => {
   }, [id]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      {loading ? (
-        <Spin size="large" />
-      ) : (
-        <Card className="w-96 p-4 border-2 border-gray-300 rounded-lg shadow-md">
-          <div className="text-center">
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              showUploadList={false}
-              beforeUpload={() => false}
-              disabled
-              //   onChange={handleAvatarChange}
-            >
-              <Avatar
-                size={100}
-                icon={<UserOutlined />}
-                src={userData?.avatar?.url}
-                className="mb-4"
-              />
-            </Upload>
+    <div className="flex flex-col items-center h-screen bg-gray-100">
+      <div
+        className="h-64 bg-cover bg-center w-full"
+        style={{ backgroundImage: "url('/carousel/4.jpg')" }}
+      ></div>
+      <div className="flex flex-col items-center space-y-4 md:flex-row md:justify-between md:w-[70%] mx-auto mt-4">
+        <Avatar
+          size={150}
+          icon={<UserOutlined />}
+          src={userData?.avatar?.url}
+          className="mb-4 md:my-[-140px] md:ring-2 md:bg-white"
+        />
+        <div className="text-center md:text-left">
+          <h2 className="text-2xl font-semibold">{userData?.name}</h2>
+          <h4 className="text-gray-500">{userData?.email}</h4>
+          <h4 className="text-gray-500">{userData?.phone}</h4>
+          <Divider />
+        </div>
+      </div>
+      <div className="content px-4 py-1 w-full md:w-[70%] mx-auto mt-4">
+        <div className="flex justify-center flex-wrap space-x-4 mt-4 md:flex-nowrap">
+          <Button
+            type="primary"
+            icon={<LikeOutlined />}
+            className="bg-blue-500 hover:bg-blue-600"
+          >
+            Like
+          </Button>
+          <Button
+            type="primary"
+            icon={<DislikeOutlined />}
+            className="bg-red-500 hover:bg-red-600"
+          >
+            Dislike
+          </Button>
+          <Button type="default" className="bg-gray-300 hover:bg-gray-400">
+            <MessageOutlined />
+            Message
+          </Button>
+          <Button type="primary" className="bg-green-500 hover:bg-green-600">
+            Follow
+          </Button>
+        </div>
 
-            <h2 className="text-xl font-semibold">{userData?.name}</h2>
-            <h4 className="text-gray-500">{userData?.email}</h4>
-            <h4 className="text-gray-500">{userData?.phone}</h4>
-            <Divider />
-            <Button
-              type="primary"
-              icon={<LikeOutlined />}
-              className="m-2 bg-blue-500 hover:bg-blue-600"
-            >
-              Like
-            </Button>
-            <Button
-              type="primary"
-              icon={<DislikeOutlined />}
-              className="m-2  bg-red-500 hover:bg-red-600"
-            >
-              Dislike
-            </Button>
-            <Button type="default" className="m-2 bg-gray-300 hover:bg-gray-400">
-              <MessageOutlined />
-              Message
-            </Button>
-            <Button type="primary" className="bg-green-500 hover:bg-green-600">
-              Follow
-            </Button>
-            <Divider />
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <h3 className="text-lg font-semibold mr-2">Followers</h3>
-                <span className="text-gray-500">(3456)</span>
-              </div>
-              <div className="flex items-center">
-                <h3 className="text-lg font-semibold mr-2">Following</h3>
-                <span className="text-gray-500">(30)</span>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Likes</h3>
-              <span className="text-gray-500">(16,534,530)</span>
-            </div>
-          </div>
-        </Card>
-      )}
+        <Tabs className="mt-4" defaultActiveKey="followers">
+          <TabPane tab={`Followers`} key="followers">
+            No Followers Yet.
+          </TabPane>
+          <TabPane tab={`Following`} key="following">
+            No Following Yet.
+          </TabPane>
+          <TabPane tab={`Likes`} key="likes">
+            No Likes Yet.
+          </TabPane>
+        </Tabs>
+
+        <div className="tabs-content mt-4">
+          <Tabs defaultActiveKey="reviews">
+            <TabPane tab="Reviews" key="reviews">
+              No Reviews Yet.
+            </TabPane>
+            <TabPane tab="Posts" key="posts">
+              No Posts Yet.
+            </TabPane>
+          </Tabs>
+        </div>
+      </div>
     </div>
   );
 };

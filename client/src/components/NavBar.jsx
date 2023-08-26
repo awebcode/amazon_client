@@ -1,5 +1,5 @@
 import { HeartIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Search } from "./";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,9 +13,12 @@ import axios from "axios";
 import DropdownProfile from "./menu/Menu";
 import { Tooltip } from "@mui/material";
 import { useMeQuery } from "../redux/auth";
-const categoryType = ["Company", "Public Business", "Public"];
-const categorySort = ["Product", "New", "Old"];
+const categoryType = ["Public","Company", "Public Business"];
+const categorySort = ["New","Old","Popular","Special","Best"];
 const NavBar = () => {
+   const location = useLocation();
+   const currentPath = location.pathname;
+  const navigate=useNavigate()
   const cart = useSelector((state) => state.cart.cart.productsNumber);
   const wishlist = useSelector((state) => state.wishlist.wishlist.productsNumber);
   const [sidebar, setSidebar] = useState(false);
@@ -28,25 +31,35 @@ const NavBar = () => {
   function func(category) {
     setSelectedCategory(category);
   }
+  const  funcSort=((sort)=> {
+    
+    setSelectedSort(sort.target.value);
+    navigate(`/search?sort=${sort.target.value === "All" ? "" : sort.target.value}`);
+  })
+  const  funcType=((type)=> {
+    setSelectedType(type.target.value)
+    navigate(`?type=${type.target.value === "All" ? "" : type.target.value}`);
+  })
   //  console.log("type sort filter category", selectedCategory, selectedType, selectedSort);
   return (
     <header className="bg-amazonclone">
       <div className="max-w-[100vw] flex flex-wrap justify-between items-center py-1 md:py-2 px-4 md:px-10 lg:px-16 xl:px-20">
         {/* Left */}
-        <div className="flex flex-[10%] items-center">
+        <div className="hidden md:flex  items-center mr-2">
           <Link to={"/"}>
-            <span className="text-[16px] md:text-3xl text-white">Amazon</span>
+            <span className="md:text-3xl text-white">Amazon</span>
           </Link>
         </div>
+       
         <div>
           <select
-            onChange={(e) => setSelectedType(e.target.value)}
-            className="md:w-fit  bg-gray-300 text-black border  text-[6px] md:text-[13px] h-5 md:h-10 select-text mx-2"
+            onChange={funcType}
+            className="md:w-fit  bg-gray-300 text-black border  text-[7px] md:text-[13px] h-5 md:h-10 select-text mx-2"
           >
-            <option value="All">All</option>
+            <option value="All">Type</option>
             {categoryType.map((v, u) => (
               <option
-                className="border-none p-2 text-[10px] md:text-[16px]"
+                className="border-none p-2 text-[8px] md:text-[16px]"
                 value={v}
                 key={u}
               >
@@ -57,13 +70,13 @@ const NavBar = () => {
         </div>
         <div>
           <select
-            onChange={(e) => setSelectedSort(e.target.value)}
-            className="md:w-fit h-5 md:h-10  bg-gray-300 text-black border  text-[6px] md:text-[13px] select-text"
+            onChange={funcSort}
+            className="md:w-fit h-5 md:h-10  bg-gray-300 text-black border  text-[7px] md:text-[13px] select-text"
           >
-            <option value="All">All</option>
+            <option value="All">Sort</option>
             {categorySort.map((v, u) => (
               <option
-                className="border-none p-2 text-[10px] md:text-[16px]"
+                className="border-none p-2 text-[8px] md:text-[16px]"
                 value={v}
                 key={u}
               >
@@ -144,7 +157,7 @@ const NavBar = () => {
               </div>
             </Link>
           </Tooltip>
-          <Link to={"#"} className="ml-2 mr-4 md:mr-6 lg:mr-8 xl:mr-10">
+          <Link to={"#"} className="ml-1 mr-1 md:mr-6 lg:mr-8 xl:mr-10">
             {/* ... Cart icon and count ... */}
             <DropdownProfile />
           </Link>

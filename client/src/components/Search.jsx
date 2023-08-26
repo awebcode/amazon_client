@@ -115,7 +115,7 @@ useEffect(() => {
   //
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
-    
+    navigate(`/search?category=${selectedCategory === "All" ? "" : selectedCategory}`);
     setCategory(selectedCategory)
     // Call the func function with the selected category
     func(selectedCategory);
@@ -130,14 +130,14 @@ useEffect(() => {
       >
         <select
           onChange={handleCategoryChange}
-          className=" md:w-fit  bg-gray-300 text-black border  text-[6px] md:text-[13px] h-[100%] select-text flex "
+          className="w-[20%] md:w-fit  bg-gray-300 text-black border  text-[7px] md:text-[13px] h-[100%] select-text flex "
         >
           <option value="All">
-            All
+            Category
           </option>
           {categories.map((v, u) => (
             <option
-              className="border-none p-2 text-[10px] md:text-[16px] mx-2"
+              className="border-none p-2 text-[8px] md:text-[16px] mx-2"
               value={v.title}
               key={u}
               
@@ -147,7 +147,7 @@ useEffect(() => {
           ))}
         </select>
         <input
-          className="px-3 flex-grow items-center w-[65px] md:w-auto h-[100%] rounded-lg text-black text-2xl"
+          className="px-3 flex-grow items-center w-[65px] md:w-auto h-[100%] rounded-lg text-black text-[8px] md:text-2xl lg:text-2xl"
           type="text"
           value={searchTerm}
           onChange={(e) => {

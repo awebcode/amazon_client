@@ -38,7 +38,10 @@ const SearchResults = () => {
   const { data: { products: myproducts } = {} } = useGetAllProductQuery();
   const category = searchParams.get("category");
   const subcategory = searchParams.get("subcategory");
-
+  const brand = searchParams.get("brand");
+  const sort = searchParams.get("sort");
+   const type = searchParams.get("type");
+console.log("brnad",brand)
   const getSearchResults = () => {
     const searchTerm = searchParams.get("searchTerm");
 
@@ -48,10 +51,21 @@ const SearchResults = () => {
       if (category) {
         categoryResults = myproducts.filter((product) => product.category === category||subcategory);
       }
+      if (brand) {
+        categoryResults = myproducts.filter(
+          (product) => product.brand === brand 
+        );
+      }
+       if (type) {
+         categoryResults = myproducts.filter((product) => product.type === type);
+      }
+       if (sort) {
+         categoryResults = myproducts.filter((product) => product.sort === sort);
+       }
 // console.log("categoryResults",categoryResults)
       if (subcategory) {
         categoryResults = categoryResults.filter(
-          (product) => product.subcategory || product.category === subcategory
+          (product) => product.subcategory || product.category === subcategory ||product.brand===brand
         );
       }
 
@@ -186,7 +200,10 @@ const SearchResults = () => {
       {!products ||
         (products.length === 0 && (
           <h1 className="p-6 md:p-5 font-bold text-center text-xl md:text-2xl text-green-500">
-            <span onClick={()=>navigate(-1)} className="text-rose-600 p-3 cursor-pointer">
+            <span
+              onClick={() => navigate(-1)}
+              className="text-rose-600 p-3 cursor-pointer"
+            >
               <ArrowBackIcon fontSize="small" />
               Back
             </span>
@@ -201,6 +218,7 @@ const SearchResults = () => {
             </h1>
           )}
           <Typography className="m-[20px]">
+            <Link to="/search" className="text-blue-600 text-2xl">Reset</Link>
             <Link to="/products" className="text-[12px] md:text-[15px]">
               <h1 className="text-[12px] md:text-[15px] font-bold my-4">
                 {category} Categories
@@ -289,9 +307,15 @@ const SearchResults = () => {
                       {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-300 absolute bottom-12 right-16">
                         Add To Cart
                       </button> */}
-                      <Tooltip title="Add To Cart" placement="top" >
-                        <button onClick={()=>addItemToCart(product)} className="bg-gray-400 hover:bg-gray-600  font-semibold px-[6px] py-[3px] md:py-2 md:px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-300 absolute bottom-12 right-16 mt-[10px] md:my-0">
-                          <ShoppingCartIcon className="text-green-400" style={{fontSize:isMobile?"14px":"18px"}} />
+                      <Tooltip title="Add To Cart" placement="top">
+                        <button
+                          onClick={() => addItemToCart(product)}
+                          className="bg-gray-400 hover:bg-gray-600  font-semibold px-[6px] py-[3px] md:py-2 md:px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-300 absolute bottom-12 right-16 mt-[10px] md:my-0"
+                        >
+                          <ShoppingCartIcon
+                            className="text-green-400"
+                            style={{ fontSize: isMobile ? "14px" : "18px" }}
+                          />
                         </button>
                       </Tooltip>
                     </div>

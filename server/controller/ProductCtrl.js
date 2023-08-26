@@ -171,6 +171,7 @@ console.log(req.body)
     user: req.user._id,
     name: req.user.name,
     rating: Number(rating),
+    createdAt: new Date(),
     comment,
   };
 
@@ -183,7 +184,7 @@ console.log(req.body)
   if (isReviewed) {
     product.reviews.forEach((rev) => {
       if (rev.user.toString() === req.user._id.toString())
-        (rev.rating = rating), (rev.comment = comment);
+        (rev.rating = rating), (rev.comment = comment),(rev.createdAt=new Date());
     });
   } else {
     product.reviews.push(review);
@@ -253,7 +254,7 @@ export const deleteReview = async (req, res, next) => {
       {
         $set: {
           ratings: newRatings,
-          numOfRatings: numOfReviews,
+          numOfReviews: numOfReviews,
           reviews: updatedReviews,
         },
       }

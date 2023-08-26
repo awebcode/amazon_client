@@ -38,6 +38,7 @@ import Profile from "./components/auth/user/Profile";
 import ForgetPassword from "./components/auth/user/ForgetPassword";
 import ResetPassword from "./components/auth/user/ResetPassword";
 import ProfilePage from "./components/auth/user/ProfileView";
+import Reviews from "./components/sections/Reviews";
 
 const App = () => {
  
@@ -78,7 +79,6 @@ const App = () => {
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/checkout" element={<Shipping />} />
         <Route path="/process/payment" element={<Pay />} />
-        <Route path="/orders" element={<Orders />} />
         <Route path="/order/:id" element={<OrderDetails />} />
         <Route path="/success" element={<OrderSuccess />} />
         //CheckoutPage
@@ -89,12 +89,14 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         // account
         <Route path="/forget-password" element={<ForgetPassword />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="/profile/user/:id" element={<ProfilePage />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        {/* <Route path="/orders" element={<Orders />} /> */}
         <Route path="/profile" element={<MainLayout />}>
           <Route index element={<Profile />} />
-
+          <Route path="reviews" element={<Reviews />} />
           <Route path="update-password" element={<UpdatePassword />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
       </Routes>
       <HomeFooter />

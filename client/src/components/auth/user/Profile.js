@@ -66,11 +66,20 @@ const dispatch=useDispatch()
           }
         }
       } catch (error) {
+         
+           navigate("/signin");
+         
         toast.error("An error occurred while fetching user details");
       }
     }
     fetchUserDetails();
   }, []);
+  const navigate=useNavigate()
+// useEffect(() => {
+//   if (!email) {
+//     navigate("/signin")
+//   }
+// }, [email,navigate])
 
   const handleAvatarChange = (info) => {
      setAvatarLoading(true)

@@ -19,6 +19,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ReviewCard from "./ReviewCard";
 import { Rating } from "@material-ui/lab";
+import { useMeQuery } from "../../redux/auth";
 const Details = () => {
   const { id } = useParams();
   const { data, isLoading, isFetching } = useGetProductDetailsQuery(id);
@@ -27,7 +28,7 @@ const Details = () => {
   const { data: products, isLoading: isLoading2 } = useGetAllProductQuery();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1); // Start with quantity 1
-
+ const {data:userData}=useMeQuery()
   useEffect(() => {
     if (data?.product) {
       setProduct(data.product);
@@ -133,7 +134,12 @@ const Details = () => {
    const indexOfLastReview = activePageReview * similarReviewPerPage;
    const indexOfFirstReview = indexOfLastReview - similarReviewPerPage;
    const currentPageReviews =
-     reviews && reviews.slice(indexOfFirstReview, indexOfLastReview);
+     reviews &&
+     reviews
+       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+       .slice(indexOfFirstReview, indexOfLastReview);
+
+  
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -200,20 +206,21 @@ const Details = () => {
         </div>
 
         <div>
+          <h1 className="text-2xl font-semibold mb-2">{data?.product?.title}</h1>
+          <p className="text-gray-600 mb-4">{data?.product?.desc}</p>
           <div className="detailsBlock-2">
-            <Rating {...options} />
+            <Rating {...options} size="small"/>
+            {/* {console.log(data?.product)} */}
             <span className="detailsBlock-2-span">
               {" "}
               ({data && data.product?.numOfReviews} Reviews)
             </span>
           </div>
-          <h1 className="text-2xl font-semibold mb-2">{data?.product?.title}</h1>
-          <p className="text-gray-600 mb-4">{data?.product?.desc}</p>
           <div className="text-sm md:text-base text-blue-500 font-semibold mb-2">
             FREE Delivery
           </div>
           <div className="text-base md:text-lg text-green-700 font-semibold mb-2">
-            In Stock
+            In Stock: <b className="text-black font-thin">{data?.product?.stock}</b>
           </div>
           <div className="text-base md:text-lg mb-4">
             Quantity:
@@ -247,7 +254,7 @@ const Details = () => {
           setOpen={setOpen}
           submitReviewToggle={submitReviewToggle}
         />
-        {reviews && reviews ? (
+        {reviews &&reviews.length>0 && reviews ? (
           <>
             <div className="reviews">
               {currentPageReviews &&
@@ -307,22 +314,22 @@ const Details = () => {
             );
           })}
         {currentSimilarProducts &&
-          currentSimilarProducts.length < similarProducts?.length &&
-          <div className="w-screen flex justify-center items-center mt-4">
-            <ReactPaginate
-              activePage={activePage}
-              activeLinkClass="page_active"
-              itemsCountPerPage={similarProductsPerPage}
-              totalItemsCount={similarProducts?.length}
-              pageRangeDisplayed={5}
-              onChange={handlePageChange}
-              itemClass="pagination-item"
-              linkClass="pagination-link"
-              prevPageText="Previous"
-              nextPageText="Next"
-            />
-          </div>
-        }
+          currentSimilarProducts.length < similarProducts?.length && (
+            <div className="w-screen flex justify-center items-center mt-4">
+              <ReactPaginate
+                activePage={activePage}
+                activeLinkClass="page_active"
+                itemsCountPerPage={similarProductsPerPage}
+                totalItemsCount={similarProducts?.length}
+                pageRangeDisplayed={5}
+                onChange={handlePageChange}
+                itemClass="pagination-item"
+                linkClass="pagination-link"
+                prevPageText="Previous"
+                nextPageText="Next"
+              />
+            </div>
+          )}
       </div>
     </div>
   );

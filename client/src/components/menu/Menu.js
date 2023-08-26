@@ -76,7 +76,7 @@ export default function DropdownProfile() {
           <Link to="/message">Message</Link>
         </MenuItem>
         <MenuItem className="m-3 text-[18px] cursor-pointer">
-          <Link to="/orders">My Orders</Link>
+          <Link to="profile/orders">My Orders</Link>
         </MenuItem>
         <MenuItem className="m-3 text-[18px] cursor-pointer">
           <Link to="/notifications">Notifications</Link>

@@ -48,14 +48,14 @@ const orderSchema = new mongoose.Schema({
         required: true,
       },
       product: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "product",
         required: true,
       },
     },
   ],
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: true,
   },
