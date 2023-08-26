@@ -37,39 +37,39 @@ import ErrorHandler from "../utils/errorHandler.js";
 //   });
 // });
 export const newOrder = catchAsyncErrors(async (req, res, next) => {
-  const {
-    shippingInfo,
-    orderItems: orderItemsWithProductIds,
-    paymentInfo,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-  } = req.body;
+  try {
+    const {
+      shippingInfo,
+      orderItems: orderItemsWithProductIds,
+      paymentInfo,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice,
+    } = req.body;
 
-  // Create an array to hold order items
-  const orderItems = [];
+    // Create an array to hold order items
+    const orderItems = [];
 
-  // Iterate through orderItemsWithProductIds to create order items
-  for (const orderItemData of orderItemsWithProductIds) {
-    const { _id:productId, ...orderItem } = orderItemData;
+    // Iterate through orderItemsWithProductIds to create order items
+    for (const orderItemData of orderItemsWithProductIds) {
+      const { _id: productId, ...orderItem } = orderItemData;
 
-    // Find the product in your database to get its ObjectId
-    const product = await Product.findById(productId);
+      // Find the product in your database to get its ObjectId
+      const product = await Product.findById(productId);
 
-    if (!product) {
-      return res.status(400).json({
-        success: false,
-        message: `Product with ID ${productId} not found.`,
-      });
+      if (!product) {
+        return res.status(400).json({
+          success: false,
+          message: `Product with ID ${productId} not found.`,
+        });
+      }
+
+      orderItem.product = product._id;
+
+      orderItems.push(orderItem);
     }
 
-    orderItem.product = product._id;
-
-    orderItems.push(orderItem);
-  }
-
-  try {
     const order = await orderModel.create({
       shippingInfo,
       orderItems,
@@ -87,6 +87,7 @@ export const newOrder = catchAsyncErrors(async (req, res, next) => {
       order,
     });
   } catch (error) {
+    console.log("create order err",error);
     res.status(500).json({
       success: false,
       message: "Error creating the order.",

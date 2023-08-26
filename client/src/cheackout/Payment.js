@@ -81,13 +81,10 @@ const Payment = () => {
     payBtn.current.disabled = true;
 
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          },
-          withCredentials:true
-      };
-      const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/v1/payment/process`, paymentData, config);
+      
+      const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/v1/payment/process`, paymentData, {
+        withCredentials:true
+      });
 
       const client_secret = data.client_secret;
 
